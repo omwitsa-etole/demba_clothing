@@ -88,9 +88,9 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
                     {%for item in ITEMS%}   
                         <li class="cart_item">
                             <span class="product-name">
-                                &nbsp;{{item['Name']}}					 <strong class="product-quantity">×&nbsp;{{item['Quantity']}}</strong>									</span>
+                                &nbsp;{{item['name']}}					 <strong class="product-quantity">×&nbsp;{{item['quantity']}}</strong>									</span>
                             <span class="product-total">
-                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{item['Payable']}}</bdi></span>				</span>
+                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{item['payable']}}</bdi></span>				</span>
                         </li>
 
                     {%endfor%}

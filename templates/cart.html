@@ -42,11 +42,11 @@
                                     <div class="ashade-cart-item-inner">
                                         <div class="ashade-cart-item-info">
                                             <div class="ashade-cart-item--thmb">
-                                                <a href="/product/{{item['Id']}}/"><img fetchpriority="high" decoding="async" width="640" height="640" src="{{API_URL}}{{item['imageURL']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="/wp-content/uploads/2020/01/masonry-2col-10-640x640.jpg 640w, {{API_URL}}{{item['imageURL']}} 100w, {{API_URL}}{{item['imageURL']}} 150w" sizes="(max-width: 640px) 100vw, 640px"></a>								</div><!-- .ashade-cart-item--thmb -->
+                                                <a href="/product/{{item['id']}}/"><img fetchpriority="high" decoding="async" width="640" height="640" src="{{API_URL}}{{item['imageURL']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="/wp-content/uploads/2020/01/masonry-2col-10-640x640.jpg 640w, {{API_URL}}{{item['imageURL']}} 100w, {{API_URL}}{{item['imageURL']}} 150w" sizes="(max-width: 640px) 100vw, 640px"></a>								</div><!-- .ashade-cart-item--thmb -->
                                             <div class="ashade-cart-item--name" data-title="Product">
                                                 <h5>
                                                     <span><span><a href="#" rel="tag"></a></span></span>
-                                                    <a href="/product/{{item['Id']}}/">{{item['Name']}}</a>									</h5>
+                                                    <a href="/product/{{item['id']}}/">{{item['name']}}</a>									</h5>
                                             </div><!-- .ashade-cart-item--product-name -->
                                         </div><!-- .ashade-cart-item-info -->
                                         <div class="ashade-cart-item--qty-wrap ">
@@ -54,16 +54,16 @@
                                             <a href="javascript:void(0)" class="ashade-cart-item--qty-minus"></a>
                                             <div class="quantity">
                     <label class="screen-reader-text" for="quantity_681318c948df8">Eyes to Eyes quantity</label>
-                    <input type="number" id="quantity_681318c948df8" class="input-text qty text" name="cart[0d7de1aca9299fe63f3e0041f02638a3][qty]" value="{{item['Quantity']}}" aria-label="Product quantity" min="0" max="" step="1" placeholder="" inputmode="numeric" autocomplete="off">
+                    <input type="number" id="quantity_681318c948df8" class="input-text qty text" name="cart[0d7de1aca9299fe63f3e0041f02638a3][qty]" value="{{itemqQuantity']}}" aria-label="Product quantity" min="0" max="" step="1" placeholder="" inputmode="numeric" autocomplete="off">
                     </div>
                                             <h5 class="ashade-cart-item--qty-label">
                                                                                     <span class="ashade-cart-item--qty">
-                                                    <span class="ashade-cart-item--qty-count">{{item['Quantity']}}</span>
+                                                    <span class="ashade-cart-item--qty-count">{{item['quantity']}}</span>
                                                     <span class="ashade-cart-item--qty-x">x</span>
-                                                    <span class="ashade-cart-item--qty-price" data-price="{{item['Price']}}"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(item['Price']*(1-item['Sale']/100))}}</bdi></span></span>
+                                                    <span class="ashade-cart-item--qty-price" data-price="{{item['price']}}"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(item['price']*(1-item['sale']/100))}}</bdi></span></span>
                                                 </span>
                                                 <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>
-                                                    {{ "%.2f"|format((item['Price'] * (1 - item['Sale'] / 100)) * item['Quantity']) }}
+                                                    {{ "%.2f"|format((item['price'] * (1 - item['sale'] / 100)) * item['quantity']) }}
 
 
                                                 </bdi></span>								
@@ -72,7 +72,7 @@
                                     </div><!-- .ashade-cart-item-inner -->
                                     
                                     <div class="ashade-product-remove-wrap product-remove">
-                                        <a href="/api/cart/?remove_item={{item['Id']}}&amp;_wpnonce=2387bb7b90" class="ashade-cart-item--remove remove" aria-label="Remove this item" data-product_id="{{item['Id']}}" data-product_sku=""></a>						</div>
+                                        <a href="/api/cart/?remove_item={{item['id']}}&amp;_wpnonce=2387bb7b90" class="ashade-cart-item--remove remove" aria-label="Remove this item" data-product_id="{{item['id']}}" data-product_sku=""></a>						</div>
                                 </li>
                                 {%endfor%}
                                                 

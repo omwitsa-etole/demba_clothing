@@ -237,7 +237,7 @@
 <script>
     let current_phone = null;
     function resendEmail() {
-     var num = "{{Order['OrderNumber']}}";
+     var num = "{{Order['orderNumber']}}";
      fetch(`/api/cart/resendemail?number=${num}`, {
          method: 'POST', // HTTP method
          headers: {
@@ -264,7 +264,7 @@
     }
     function getPayment() {
         const body = document.getElementById('payment-methods');
-        var ph = "{{Order['Phone']}}";
+        var ph = "{{Order['phone']}}";
         body.innerHTML += `
             <div class="trip" onclick="document.getElementById('${ph}').checked=true">
                 <div class="trip-details">

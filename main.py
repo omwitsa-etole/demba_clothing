@@ -101,16 +101,22 @@ async def fetch_data():
         #print(response.status_code)
         if response.status_code == 200:
             data = response.json()
-           # print("data=>",data)
-            success = data.get("Success", False)
-            feed = data.get("Feed")
-            product = data.get("Products")
-            banner = data.get("Banners")
+            print("data=>",data)
+            success = data.get("success", False)
+            feed = data.get("feed")
+            product = data.get("products")
+            banner = data.get("banners")
     except Exception as e:
         print("error",e)
-    ALL_FEED += [f for f in feed if f not in ALL_FEED]
-    ALL_PRODUCT += [f for f in product if f not in ALL_PRODUCT]
-    ALL_BANNER += [f for f in banner if f not in ALL_BANNER]
+    if feed:
+        ALL_FEED += [f for f in feed if f not in ALL_FEED]
+
+    if product:
+        ALL_PRODUCT += [f for f in product if f not in ALL_PRODUCT]
+
+    if banner:
+        ALL_BANNER += [f for f in banner if f not in ALL_BANNER]
+
 
 @app.route("/api/cart/resendemail",methods=["POST"])
 @app.route("/cart/resendemail",methods=["POST"])
@@ -184,7 +190,7 @@ async def cart():
     if 'manifest' not in session:
         session['manifest'] = {}
     session["manifest"]["cart_items"] = CART_ITEMS
-    return render_template("cart.html",manifest=session["manifest"],Items=items,Total=total,API_URL=API_URL)
+    return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=0,API_URL=API_URL)
 
 @app.route("/shop")
 async def shop():
