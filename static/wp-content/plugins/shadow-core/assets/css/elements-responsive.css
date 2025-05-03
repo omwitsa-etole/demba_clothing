@@ -1,0 +1,120 @@
+/** 
+ * Author: Shadow Themes
+ * Author URL: http://shadow-themes.com
+ */
+
+/* TABLET LANDSCAPE
+   ---------------- */
+
+@media only screen and (max-width: 1200px) {
+    .shadowcore-progress-item-wrap {
+        padding: 0 20px;
+    }
+}
+
+/* TABLET PORTRAIT
+   --------------- */
+
+@media only screen and (max-width: 960px) {
+    /* --- Service Cards --- */
+    .shadowcore-grid-column--1 .shadowcore-service-card {
+        width: 100%;
+    }
+    .shadowcore-grid-column--4 .shadowcore-service-card,
+    .shadowcore-grid-column--2 .shadowcore-service-card {
+        width: 50%;
+    }
+    .shadowcore-grid-column--3 .shadowcore-service-card {
+        width: 33.33%;
+    }
+    /* --- Testimonials --- */
+    .shadowcore-grid-column--1 .shadowcore-testimonials-item {
+        width: 100%;
+    }
+    .shadowcore-grid-column--2 .shadowcore-testimonials-item,
+    .shadowcore-grid-column--3 .shadowcore-testimonials-item {
+        width: 50%;
+    }
+    .shadowcore-grid-column--3 .shadowcore-testimonials-item {
+        width: 33.33%;
+    }
+    /* --- Grid Galleries --- */
+    .shadowcore-grid-column--1 .shadowcore-grid-item {
+        width: 100%;
+    }
+    .shadowcore-grid-column--2 .shadowcore-grid-item,
+    .shadowcore-grid-column--4 .shadowcore-grid-item {
+        width: 50%;
+    }
+    .shadowcore-grid-column--3 .shadowcore-grid-item {
+        width: 33.33%;
+    }
+}
+
+/* MOBILE PHONE
+   ------------ */
+
+@media only screen and (max-width: 767px) {
+    /* --- Before After --- */
+    .shadowcore-before-after-divider:before {
+        transform: scale(0.75) rotate(45deg);
+    }
+    .shadowcore-before-after-divider svg {
+        transform: scale(0.75);
+    }
+    /* --- Circle Progress Bar --- */
+    .shadowcore-progress-item-wrap {
+        padding: 0;
+        max-width: 180px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* --- Service Cards --- */
+    .shadowcore-grid-column--1 .shadowcore-service-card,
+    .shadowcore-grid-column--2 .shadowcore-service-card,
+    .shadowcore-grid-column--3 .shadowcore-service-card,
+    .shadowcore-grid-column--4 .shadowcore-service-card {
+        width: 100%;
+    }
+    /* --- Testimonials --- */
+    .shadowcore-grid-column--1 .shadowcore-testimonials-item,
+    .shadowcore-grid-column--2 .shadowcore-testimonials-item,
+    .shadowcore-grid-column--3 .shadowcore-testimonials-item,
+    .shadowcore-grid-column--4 .shadowcore-testimonials-item {
+        width: 100%;
+    }
+    /* --- Grid Galleries --- */
+    .shadowcore-grid-column--1 .shadowcore-grid-item,
+    .shadowcore-grid-column--2 .shadowcore-grid-item,
+    .shadowcore-grid-column--3 .shadowcore-grid-item,
+    .shadowcore-grid-column--4 .shadowcore-grid-item {
+        width: 100%;
+    }
+    /* --- Vertical Ribbon --- */
+    .shadowcore-ribbon.vertical-mobile-layout {
+        position: static;
+        display: flex;
+        flex-direction: column;
+    }
+    .shadowcore-ribbon.vertical-mobile-layout .shadowcore-ribbon-item--image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .shadowcore-ribbon.vertical-mobile-layout .shadowcore-ribbon-item {
+        width: 100%;
+        height: auto;
+    }
+    .shadowcore-ribbon-wrap.vertical-mobile-wrap {
+        height: auto !important;
+        overflow: visible;
+    }
+    .shadowcore-ribbon.vertical-mobile-layout {
+        height: auto !important;
+    }
+}
+
+/* OLD MOBILE PHONE
+   ---------------- */
+
+@media only screen and (max-width: 360px) {}

@@ -1,0 +1,480 @@
+{%extends 'main.html'%}
+
+{%block content%}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    
+    .cardb {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 100%;
+        margin: 20px;
+        
+    }
+
+    .back-arrow {
+        cursor: pointer;
+        font-size: 30px;
+        float: left;
+        top: 30%;
+        padding: 0;
+    }
+
+    .card-header {
+        background-color: #23274E;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .booking-history {
+        padding: 15px;
+    }
+
+    .trip {
+        border-bottom: 1px solid #ddd;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+
+        .trip:last-child {
+            border-bottom: none;
+        }
+
+    .trip-details {
+        flex: 1;
+    }
+
+        .trip-details h3 {
+            margin: 0;
+        }
+
+    .date {
+        color: #777;
+    }
+
+    .payment-title {
+        font-weight: 600;
+        font-size: 18px;
+        margin-left: 5%;
+    }
+
+    .payment-add {
+        width: 100%;
+        display: flex;
+        margin-top: 5%;
+        text-align: left;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #23274e;
+    }
+
+        .payment-add .fas {
+            margin-right: 5%;
+        }
+
+    .button-17 {
+        position: absolute;
+        right: 2.5%;
+        bottom: 1%;
+        align-items: center;
+        appearance: none;
+        background-color: #fff;
+        border-radius: 24px;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+        box-sizing: border-box;
+        color: #3c4043;
+        cursor: pointer;
+        display: inline-flex;
+        fill: currentcolor;
+        font-family: "Google Sans",Roboto,Arial,sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: .25px;
+        line-height: normal;
+        max-width: 100%;
+        overflow: visible;
+        padding: 2px 24px;
+        text-align: center;
+        text-transform: none;
+        transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: auto;
+        will-change: transform,opacity;
+        z-index: 0;
+    }
+
+        .button-17:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+        }
+
+        .button-17:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+            outline: none;
+        }
+
+        .button-17:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+
+        .button-17:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+        }
+
+            .button-17:not(:disabled):hover {
+                box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+            }
+
+            .button-17:not(:disabled):focus {
+                box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+            }
+
+            .button-17:not(:disabled):active {
+                box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+            }
+
+        .button-17:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+        }
+        .loader{display:none;}
+        .center-content {
+            min-height: 189px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            }
+            .resend-link {
+            margin-right: 50%;
+            cursor: pointer;
+            }
+</style>
+
+<div class="container" style="margin: 10% auto;">
+    <div class="row" style="width: 55%;display:none;">
+        <div class="center-content text-center">
+            <div class="text-success fs-1">
+              <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <a class="resend-link text-primary text-decoration-underline" onclick="resendEmail()">Resend Email</a>
+          </div>
+        
+        </div>
+    <div class="cardb" id="cardb" style="position:relative;">
+        <div class="card-header" style="position: relative;">
+            <div class="back-arrow" onclick="goBack()">
+                &larr;
+            </div>
+            <h2>Payment Methods</h2>
+            <a onclick="getPayment()" style="cursor: pointer;display:none;text-decoration: none;color: white;position: absolute;bottom: 4px;right: 4px;">Refresh</a>
+        </div>
+        <div class="booking-history" style="position: relative;width: 100%;">
+            <div id="payment-methods"></div>
+            <a class="payment-add" data-toggle="modal" onclick="mpesaModal()" data-target="#mpesaModal" href="#payments">
+                <i class="fas fa-plus"></i>Add Method
+            </a>
+            <a class="payment-add resend-link text-primary text-decoration-underline" onclick="resendEmail()">Resend Email</a>
+         
+            <a class="btn" data-toggle="modal" id="editdel" style="position: absolute;right: 2%;display: none;" onclick="" data-target="#cardModal" href="#payments">
+                <i class="fas fa-plus"></i>Edit/Delete
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="loader" id="loader">
+    <svg version="1.1" class="svg-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 80 80" xml:space="preserve">
+    <path fill="#23366E" d="M10,40c0,0,0-0.4,0-1.1c0-0.3,0-0.8,0-1.3c0-0.3,0-0.5,0-0.8c0-0.3,0.1-0.6,0.1-0.9c0.1-0.6,0.1-1.4,0.2-2.1
+          c0.2-0.8,0.3-1.6,0.5-2.5c0.2-0.9,0.6-1.8,0.8-2.8c0.3-1,0.8-1.9,1.2-3c0.5-1,1.1-2,1.7-3.1c0.7-1,1.4-2.1,2.2-3.1
+          c1.6-2.1,3.7-3.9,6-5.6c2.3-1.7,5-3,7.9-4.1c0.7-0.2,1.5-0.4,2.2-0.7c0.7-0.3,1.5-0.3,2.3-0.5c0.8-0.2,1.5-0.3,2.3-0.4l1.2-0.1
+          l0.6-0.1l0.3,0l0.1,0l0.1,0l0,0c0.1,0-0.1,0,0.1,0c1.5,0,2.9-0.1,4.5,0.2c0.8,0.1,1.6,0.1,2.4,0.3c0.8,0.2,1.5,0.3,2.3,0.5
+          c3,0.8,5.9,2,8.5,3.6c2.6,1.6,4.9,3.4,6.8,5.4c1,1,1.8,2.1,2.7,3.1c0.8,1.1,1.5,2.1,2.1,3.2c0.6,1.1,1.2,2.1,1.6,3.1
+          c0.4,1,0.9,2,1.2,3c0.3,1,0.6,1.9,0.8,2.7c0.2,0.9,0.3,1.6,0.5,2.4c0.1,0.4,0.1,0.7,0.2,1c0,0.3,0.1,0.6,0.1,0.9
+          c0.1,0.6,0.1,1,0.1,1.4C74,39.6,74,40,74,40c0.2,2.2-1.5,4.1-3.7,4.3s-4.1-1.5-4.3-3.7c0-0.1,0-0.2,0-0.3l0-0.4c0,0,0-0.3,0-0.9
+          c0-0.3,0-0.7,0-1.1c0-0.2,0-0.5,0-0.7c0-0.2-0.1-0.5-0.1-0.8c-0.1-0.6-0.1-1.2-0.2-1.9c-0.1-0.7-0.3-1.4-0.4-2.2
+          c-0.2-0.8-0.5-1.6-0.7-2.4c-0.3-0.8-0.7-1.7-1.1-2.6c-0.5-0.9-0.9-1.8-1.5-2.7c-0.6-0.9-1.2-1.8-1.9-2.7c-1.4-1.8-3.2-3.4-5.2-4.9
+          c-2-1.5-4.4-2.7-6.9-3.6c-0.6-0.2-1.3-0.4-1.9-0.6c-0.7-0.2-1.3-0.3-1.9-0.4c-1.2-0.3-2.8-0.4-4.2-0.5l-2,0c-0.7,0-1.4,0.1-2.1,0.1
+          c-0.7,0.1-1.4,0.1-2,0.3c-0.7,0.1-1.3,0.3-2,0.4c-2.6,0.7-5.2,1.7-7.5,3.1c-2.2,1.4-4.3,2.9-6,4.7c-0.9,0.8-1.6,1.8-2.4,2.7
+          c-0.7,0.9-1.3,1.9-1.9,2.8c-0.5,1-1,1.9-1.4,2.8c-0.4,0.9-0.8,1.8-1,2.6c-0.3,0.9-0.5,1.6-0.7,2.4c-0.2,0.7-0.3,1.4-0.4,2.1
+          c-0.1,0.3-0.1,0.6-0.2,0.9c0,0.3-0.1,0.6-0.1,0.8c0,0.5-0.1,0.9-0.1,1.3C10,39.6,10,40,10,40z">
+          
+      </path>
+    <path fill="#ED1E24" d="M62,40.1c0,0,0,0.2-0.1,0.7c0,0.2,0,0.5-0.1,0.8c0,0.2,0,0.3,0,0.5c0,0.2-0.1,0.4-0.1,0.7
+          c-0.1,0.5-0.2,1-0.3,1.6c-0.2,0.5-0.3,1.1-0.5,1.8c-0.2,0.6-0.5,1.3-0.7,1.9c-0.3,0.7-0.7,1.3-1,2.1c-0.4,0.7-0.9,1.4-1.4,2.1
+          c-0.5,0.7-1.1,1.4-1.7,2c-1.2,1.3-2.7,2.5-4.4,3.6c-1.7,1-3.6,1.8-5.5,2.4c-2,0.5-4,0.7-6.2,0.7c-1.9-0.1-4.1-0.4-6-1.1
+          c-1.9-0.7-3.7-1.5-5.2-2.6c-1.5-1.1-2.9-2.3-4-3.7c-0.6-0.6-1-1.4-1.5-2c-0.4-0.7-0.8-1.4-1.2-2c-0.3-0.7-0.6-1.3-0.8-2
+          c-0.2-0.6-0.4-1.2-0.6-1.8c-0.1-0.6-0.3-1.1-0.4-1.6c-0.1-0.5-0.1-1-0.2-1.4c-0.1-0.9-0.1-1.5-0.1-2c0-0.5,0-0.7,0-0.7
+          s0,0.2,0.1,0.7c0.1,0.5,0,1.1,0.2,2c0.1,0.4,0.2,0.9,0.3,1.4c0.1,0.5,0.3,1,0.5,1.6c0.2,0.6,0.4,1.1,0.7,1.8
+          c0.3,0.6,0.6,1.2,0.9,1.9c0.4,0.6,0.8,1.3,1.2,1.9c0.5,0.6,1,1.3,1.6,1.8c1.1,1.2,2.5,2.3,4,3.2c1.5,0.9,3.2,1.6,5,2.1
+          c1.8,0.5,3.6,0.6,5.6,0.6c1.8-0.1,3.7-0.4,5.4-1c1.7-0.6,3.3-1.4,4.7-2.4c1.4-1,2.6-2.1,3.6-3.3c0.5-0.6,0.9-1.2,1.3-1.8
+          c0.4-0.6,0.7-1.2,1-1.8c0.3-0.6,0.6-1.2,0.8-1.8c0.2-0.6,0.4-1.1,0.5-1.7c0.1-0.5,0.2-1,0.3-1.5c0.1-0.4,0.1-0.8,0.1-1.2
+          c0-0.2,0-0.4,0.1-0.5c0-0.2,0-0.4,0-0.5c0-0.3,0-0.6,0-0.8c0-0.5,0-0.7,0-0.7c0-1.1,0.9-2,2-2s2,0.9,2,2C62,40,62,40.1,62,40.1z">
+      </path>
+  </svg>
+</div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  >
+
+<script>
+    let current_phone = null;
+    function resendEmail() {
+     var num = "{{Order['OrderNumber']}}";
+     fetch(`/api/cart/resendemail?number=${num}`, {
+         method: 'POST', // HTTP method
+         headers: {
+             'Content-Type': 'application/json',  // Optional, depending on the server
+         }
+     })
+         .then(response => response.json())  // Parse JSON response
+         .then(data => {
+            swal('Success!',data?.Message ?? 'Email resent', 'success');
+           // createAlert(data?.Message ?? "Email resent success","success",4500);
+             console.log('Success:', data);  // Handle the response data
+         })
+         .catch(error => {
+             swal('Error!', error, 'error');
+             console.error('Error:', error);  // Handle any errors
+         });
+ }
+    function goBack() {
+        //window.location.href = "book"
+    }
+    function editDelete(id) {
+        //console.log(id)
+        current_phone = id
+    }
+    function getPayment() {
+        const body = document.getElementById('payment-methods');
+        var ph = "{{Order['Phone']}}";
+        body.innerHTML += `
+            <div class="trip" onclick="document.getElementById('${ph}').checked=true">
+                <div class="trip-details">
+                    <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
+                    <span class="payment-title">${"MPESA"} <span ></span></span>
+                    <span class="payment-desc">${ph} <span ></span></span>
+                </div>
+                <p class="amount">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" onchange="editDelete(this.id)" name="paymentDefault" id="${ph}">
+                        <label class="form-check-label" for="${ph}">
+                        </label>
+                        </div>
+
+                </p>
+
+            </div>
+            `
+       // fetchData("api/models/user/getPayments", function (datas) {
+
+
+
+
+    }
+    setTimeout(function () {
+        getPayment();
+
+    }, 200)
+    document.addEventListener("click", function (e) {
+        if (e.target && e.target.id === "btn-pay") {
+            e.preventDefault();
+            $(this).text("Loading...")
+            var checkedCheckboxes = $('input[name="paymentDefault"]:checked');
+            // console.log(checkedCheckboxes[0])
+            if (typeof (checkedCheckboxes[0]) == 'undefined') {
+                //swal('Info!', 'Select payment Method', 'info');
+                alert('Select payment Method');
+                return
+            }
+            current_phone = $(checkedCheckboxes[0]).attr('id')
+            var payment_amount = "{{Total}}";
+            console.log(current_phone,payment_amount)
+            if (current_phone == null ) {
+                //swal('Info!', 'Select payment Method', 'info');
+                alert('Select payment Method');
+                return
+            }
+            /*if (data.invoice.complete == true && data.booking.complete == true) {
+                swal('Info!', 'This payment has been recieved', 'info');
+                $(this).text("Pay Now")
+                return
+            }*/
+            try {
+                var url = window.location.href;
+                if (current_phone.startsWith('0')) {
+                    current_phone = '254' + current_phone.slice(1);
+                }
+                // Extract the domain name
+                var domain = new URL(url).hostname;
+
+                //console.log(domain);
+                //startloader()
+                data = {
+
+                    "accountReference": "Order Payment",
+                    'phoneNumber': current_phone,
+                    'phone': current_phone,
+                    'amount': payment_amount,
+                    //'reference': invoice,
+                    'action': 'stk-push',
+                    'callback':  "api/transaction/confirm",
+                    'time': new Date(),
+                }
+                //swal('Success!', 'Payment Request processed success', 'success');
+                alert('Payment Request processed success');
+              //  clearInterval(intervalId);
+            } catch (e) {
+                console.log(e);
+                //swal('Failed!', 'Failed to initiate payment request', 'error');
+                alert('Failed to initiate payment request');
+            }
+        }
+    });
+    const btn = document.createElement("button")
+    btn.setAttribute("class", "button-17")
+    btn.setAttribute("type", "button")
+    //const booking = data.booking._id;
+    //invoice = data.invoice._id;
+    btn.setAttribute("id", "btn-pay")
+    btn.innerHTML = "Pay Now"
+    document.getElementById("cardb").children[0].appendChild(btn)
+
+
+    const addModal = (id) => {
+        let el = `
+		<div id=${id} class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" style="position:absolute;right:2%;">&times;</button>
+				<h4 class="modal-title">Modal Header</h4>
+			  </div>
+			  <div class="modal-body" >
+				<p>Some text in the modal.</p>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"  >Close</button>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+	`;
+        return el
+    }
+
+
+    function mpesaModal() {
+
+        const mPay = () => {
+            let el = `
+			<div class="col-md-7 col-lg-5 col-xl-4" style="min-width:100%;">
+				<div class="card" style="border-radius: 0px;max-height:334px;width: 95%;">
+				  <div class="card-body p-4">
+					<form onsubmit="return addMpesa()" id="mpesaform">
+					  <div class="d-flex justify-content-between align-items-center mb-3">
+						<img src="assets/images/icons/mpesa.jpg" alt="mpesa" width="64px" />
+						<div class="form-outline">
+						  <input type="text" name="card" id="typeText" class="form-control form-control-lg"
+							placeholder="2547 5678 9012" minlength="9" maxlength="13" />
+						  <label class="form-label" for="typeText" required>Mobile Number</label>
+						</div>
+
+					  </div>
+
+					  <div class="d-flex justify-content-between align-items-center mb-4">
+						<div class="form-outline">
+						  <input type="text" name="name" id="typeName" class="form-control form-control-lg" siez="17"
+							placeholder="Owner's Name" required/>
+						  <label class="form-label"  for="typeName">Mobile's number Name</label>
+						</div>
+					  </div>
+
+					  <div  class="d-flex justify-content-between align-items-center mb-4">
+
+
+						<button type="submit" class="btn btn-info btn-lg btn-rounded">
+						 Add <i class="fas fa-arrow-right"></i>
+						</button>
+					  </div>
+					</form>
+					<a style="display:none;position:absolute;bottom:1%;right:1%;cursor:pointer;" onclick="cardModal()" data-toggle="modal" data-target="#cardModal"> Add Credit card</a>
+				  </div>
+				</div>
+			  </div>
+		`
+            return el
+        }
+
+
+        const body = document.getElementById("mpesaModal");
+
+        const title = body.getElementsByClassName("modal-title")
+        const el = body.getElementsByClassName("modal-body")
+        title[0].innerHTML = "Add Mpesa "
+        el[0].innerHTML = mPay()
+        el[0].setAttribute("style", "width:99%;margin: 0;padding: 0;")
+        console.log(body)
+    }
+
+    function addMpesa() {
+        //startloader()
+        var myform = $("#mpesaform").serialize({ hash: true })
+        let fom = new URLSearchParams(myform)
+        //email,password
+        var payload = {
+
+            name: fom.getAll("name")[0],
+            card: fom.getAll("card")[0],
+            //cvv: fom.getAll("identification")[0],
+            type: "mpesa",
+        };
+       // sendData("/api/models/user/addPayment", "post", payload, createAlert)
+        //userProfile()
+        const body = document.getElementById('payment-methods');
+        var ph = payload.card;
+        body.innerHTML += `
+            <div class="trip" onclick="document.getElementById('${ph}').checked=true">
+                <div class="trip-details">
+                    <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
+                    <span class="payment-title">${payload.name ?? "MPESA"} <span ></span></span>
+                    <span class="payment-desc">${ph} <span ></span></span>
+                </div>
+                <p class="amount">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" onchange="editDelete(this.id)" name="paymentDefault" id="${ph}">
+                        <label class="form-check-label" for="${ph}">
+                        </label>
+                        </div>
+
+                </p>
+
+            </div>
+            `;
+        $('#mpesaModal').modal('hide');
+
+        return false
+    }
+    document.body.innerHTML += addModal("mpesaModal");
+</script>
+{%endblock%}

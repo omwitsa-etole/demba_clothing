@@ -1,0 +1,219 @@
+{%extends 'main.html'%}
+
+{%block content%}
+
+<div class="ashade-content ashade-woo-content show-sale-labels hide-sold-labels" style="min-height: 0px; transform: translate(0px, 0px); opacity: 1;"><div class="ashade-mobile-title-wrap">
+    <h1 class="ashade-page-title">
+        <span>
+        <span class="ashade-woo-categories"><a href="/product-category/{{Product['Category']['Name']}}/" rel="tag">{{Product['Category']['Name']}}  </a></span>                    </span>
+        {{Product['Brand']['Name']}}              </h1>
+</div>
+        <div class="ashade-row ">
+            <div class="ashade-col col-12">
+                <div class="woocommerce-notices-wrapper"></div><div id="product-{{Product['Id']}}" class="ashade-single-product product type-product post-{{Product['Id']}} status-publish instock product_cat-cities product_tag-cities product_tag-photo product_tag-photography product_tag-travel has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple">
+<div class="ashade-single-product--main">
+<div class="ashade-single-product-gallery-wrap">
+<div class="ashade-single-product-image--large">
+
+        <a href="{{API_URL}}{{Product['Images'][0]['Image_Url']}}" class="ashade-lightbox-link " data-elementor-open-lightbox="no" data-gallery="product_{{Product['Id']}}" data-size="1000x1200" data-count="0">
+        <img fetchpriority="high" width="960" height="1152" src="{{API_URL}}{{Product['Images'][0]['Image_Url']}}" class="attachment-woocommerce_single size-woocommerce_single" alt="" decoding="async" 
+        srcset="{{API_URL}}{{Product['Images'][0]['Image_Url']}} 960w, {{API_URL}}{{Product['Images'][0]['Image_Url']}} 250w, {{API_URL}}{{Product['Images'][0]['Image_Url']}} 853w, {{API_URL}}{{Product['Images'][0]['Image_Url']}} 768w, {{API_URL}}{{Product['Images'][0]['Image_Url']}} 1000w" sizes="(max-width: 960px) 100vw, 960px"></a>	</div><!-- .ashade-single-product-gallery--large -->
+
+
+</div><!-- .ashade-single-product-gallery-wrap -->
+<div class="summary entry-summary">
+<div class="ashade-single-product--title">
+    <h3>
+        {{Product['Title']}} 			</h3>
+    <div class="ashade-single-product--price">
+        <span><p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{{Product['Price']}}</bdi></span></p>
+</span>
+    </div><!-- .ashade-single-product--price -->
+</div><!-- .ashade-single-product--title -->
+<div class="ashade-single-product--excerpt">
+    <div class="woocommerce-product-details__short-description">
+        {{Product['EDetail']}}
+    </div>
+</div><!-- .ashade-single-product--excerpt -->
+<div class="ashade-single-product--qty">
+                <form class="ashade-single-add2cart--simple cart" action="#/product/evening/" method="post" enctype="multipart/form-data">
+    
+<div class="ashade-single-add2cart--qty ">
+<a href="javascript:void(0)" class="ashade-single-add2cart--minus is-disabled"></a>
+<div class="quantity">
+<label class="screen-reader-text" for="quantity_680f4bcc98ed6">{{Product['Title']}}  quantity</label>
+<input type="number" id="quantity_{{Product['Id']}}" class="input-text qty text" name="quantity" value="1" aria-label="Product quantity" min="1" max="{{Product['Stock']}}" step="1" placeholder="" inputmode="numeric" autocomplete="off">
+</div>
+<a href="javascript:void(0)" class="ashade-single-add2cart--plus"></a>
+</div><!-- .ashade-single-add2cart--qty -->
+{%set pid = Product["Id"]%}
+{%set pname = Product["Title"]%}
+{%set psale = Product["Sale"]%}
+{%set price = Product["Price"]%}
+{%set img = Product['image_Url']%}
+{%set stock = Product['Stock']%}
+<div class="ashade-single-add2cart--button ">
+<button type="button"  onclick="AddCart('{{pid}}','{{pname}}',jQuery('#quantity_{{PID}}').val(),'{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" name="add-to-cart" value="{{Product['Id']}} " class="single_add_to_cart_button button alt">Add to cart</button>
+</div><!-- .ashade-single-add2cart--button -->
+
+</form>
+
+
+</div><!-- .ashade-single-product--qty -->
+<div class="ashade-single-product--tags" style="display:none;">
+    <a href="/product-tag/cities/" rel="tag">cities</a><a href="/product-tag/photo/" rel="tag">photo</a><a href="/product-tag/photography/" rel="tag">photography</a><a href="/product-tag/travel/" rel="tag">travel</a>			</div>
+</div><!-- .entry-summary -->
+<div class="clear"></div>
+</div><!-- .ashade-single-product--main -->
+
+<div class="ashade-wc-tabs-wrap wc-tabs-wrapper">
+<ul class="ashade-wc-tabs wc-tabs" role="tablist">
+                <li class="description_tab ashade-wc-tab-item is-active" id="tab-title-description" role="tab" aria-controls="tab-description" data-tab="#product-description">
+        <span>Description</span>
+    </li>
+                <li class="reviews_tab ashade-wc-tab-item" id="tab-title-reviews" role="tab" aria-controls="tab-reviews" data-tab="#product-reviews">
+        <span>Reviews (0)</span>
+    </li>
+        </ul>
+        <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description" style="display: none;">
+    
+<h3>
+<span>Detailed Information</span>
+Description	</h3>
+<p>{{Product['Description']|safe}} </p>
+
+</div>
+        <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content wc-tab" id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews" style="display: none;">
+    <div id="reviews" class="woocommerce-Reviews" style="display: block;">
+
+<div id="review_form_wrapper">
+<div id="review_form" class="ashade-review-form-wrap">
+        <div id="respond" class="comment-respond">
+<h4><span>Leave a Review about "{{Product['Title']}}"</span>Be the first to review “{{Product['Title']}}” <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wp/ashade/product/evening/#respond" style="display:none;">Cancel reply</a></small></h4><form action="" method="post" id="commentform" class="comment-form" novalidate=""><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required=""></p>
+<p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required=""></p>
+<div class="comment-form-rating"><label for="rating">Your rating</label><div class="ashade-select-wrap" style="max-width: 696px;"><p class="stars">						<span>							<a class="star-1" href="#">1</a>							<a class="star-2" href="#">2</a>							<a class="star-3" href="#">3</a>							<a class="star-4" href="#">4</a>							<a class="star-5" href="#">5</a>						</span>					</p><select name="rating" id="rating" required="" class="is-hidden" style="display: none;">
+            <option value="">Rate…</option>
+            <option value="5">Perfect</option>
+            <option value="4">Good</option>
+            <option value="3">Average</option>
+            <option value="2">Not that bad</option>
+            <option value="1">Very poor</option>
+        </select><div class="ashade-select is-link">Rate…</div><ul class="ashade-select__list" style="display: none;"><li class="is-link" data-value="">Rate…</li><li class="is-link" data-value="5">Perfect</li><li class="is-link" data-value="4">Good</li><li class="is-link" data-value="3">Average</li><li class="is-link" data-value="2">Not that bad</li><li class="is-link" data-value="1">Very poor</li></ul>				<svg xmlns="http://www.w3.org/2000/svg" width="19.875" height="10.969" viewBox="0 0 19.875 10.969">  					<path id="arrow-down" d="M-8.812-12.937,0-4.078l8.813-8.859,1.125,1.125L.563-2.437,0-1.969l-.562-.469-9.375-9.375Z" transform="translate(9.938 12.938)"></path>				</svg></div></div><p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea></p><p class="comment-form-cookies-consent"><div class="ashade-checkbox-wrap is-link "><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"></div> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit a Review"> <input type="hidden" name="comment_post_ID" value="688" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p></form>	</div><!-- #respond -->
+    </div>
+</div>
+
+<div class="clear"></div>
+</div>
+</div>
+
+</div>
+
+<nav class="ashade-post-navigation-wrap has-prev has-next ashade-wc-single-nav">
+<div class="ashade-prev-post-link">
+<div class="ashade-post-nav-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="9.844" height="17.625" viewBox="0 0 9.844 17.625">
+        <path id="angle-left" d="M2.25-17.812l1.125,1.125L-4.359-9,3.375-1.312,2.25-.187-6-8.437-6.469-9-6-9.562Z" transform="translate(6.469 17.813)" fill="#ffffff"></path>
+    </svg>
+</div>
+<h6>
+    <span>Return to</span>
+    Product Listing			</h6>
+<a href="/shop"></a>
+</div>
+    <div class="ashade-next-post-link">
+<h6>
+    <span>Proceed To</span>
+    Shopping Cart			</h6>
+<div class="ashade-post-nav-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="9.844" height="17.625" viewBox="0 0 9.844 17.625">
+        <path id="angle-right" d="M-2.25-17.812,6-9.562,6.469-9,6-8.437-2.25-.187-3.375-1.312,4.359-9l-7.734-7.687Z" transform="translate(3.375 17.813)" fill="#ffffff"></path>
+    </svg>
+</div>
+<a href="/cart"></a>
+</div>
+</nav><!-- .ashade-post-navigation-wrap -->
+
+<section class="related products">
+
+        <h3>
+    <span>You may also like</span>
+    Related Products			</h3>
+    
+<ul class="products columns-3">
+    {%for product in Related%}
+    <li class="product type-product post-668 status-publish first instock product_cat-fashion product_tag-fashion product_tag-personal product_tag-photo product_tag-photography has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple">
+        <div class="ashade-woo-loop-item ashade-wc-tools--always">
+        <div class="ashade-woo-loop-item__image-wrap">
+                    <a href="/product/{{product['Id']}}/">
+            <img width="640" height="640" src="{{API_URL}}{{product['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async"
+             srcset="{{API_URL}}{{product['image_Url']}} 640w, {{API_URL}}{{product['image_Url']}} 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
+        <div class="ashade-wc-loop-item__view"  id="added-{{product['Id']}}">
+            <h6>
+                <span>Item Added</span>
+                <a href="/cart/">View Cart</a>
+            </h6>
+        </div><!-- .ashade-wc-loop-item__view -->
+        <div class="ashade-woo-loop-item__tools">
+            {%set pid = product["Id"]%}
+            {%set pname = product["Title"]%}
+            {%set psale = product["Sale"]%}
+            {%set price = product["Price"]%}
+            {%set img = product['image_Url']%}
+            {%set stock = Product['Stock']%}
+                            <a href="{{API_URL}}{{img}}" data-elementor-open-lightbox="no" data-caption="Fashion Coat - $14.99" data-size="1920x1280" class="ashade-lightbox-link ashade-woo-loop-item__details" data-count="0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22.531" height="22.531" viewBox="0 0 22.531 22.531">
+                    <path d="M10.445-19.3a8.426,8.426,0,0,1,6.18-2.57A8.426,8.426,0,0,1,22.8-19.3a8.426,8.426,0,0,1,2.57,6.18,8.426,8.426,0,0,1-2.57,6.18,8.426,8.426,0,0,1-6.18,2.57A8.475,8.475,0,0,1,11.1-6.344l-6.945,7L2.844-.656l7-6.945a8.475,8.475,0,0,1-1.969-5.523A8.426,8.426,0,0,1,10.445-19.3Zm11.129,1.23a6.744,6.744,0,0,0-4.949-2.051,6.744,6.744,0,0,0-4.949,2.051,6.744,6.744,0,0,0-2.051,4.949,6.744,6.744,0,0,0,2.051,4.949,6.744,6.744,0,0,0,4.949,2.051,6.744,6.744,0,0,0,4.949-2.051,6.744,6.744,0,0,0,2.051-4.949A6.744,6.744,0,0,0,21.574-18.074ZM15.75-16.625H17.5V-14h2.625v1.75H17.5v2.625H15.75V-12.25H13.125V-14H15.75Z" transform="translate(-2.844 21.875)" fill="gray"></path>
+                </svg>
+            </a>
+                            <span></span>
+                            <a href="#" onclick="AddCart('{{pid}}','{{pname}}','1','{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" class="button ashade-woo-loop-item__add2cart product_type_simple add_to_cart_button" data-product_id="686" data-product_sku="" aria-label="Add to cart: “{{product['Title']}}”"rel="nofollow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21.656" height="17.5" viewBox="0 0 21.656 17.5" class="ashade-woo-icon--a2c">
+                    <path d="M3.5-18.375H5.469a1.708,1.708,0,0,1,1.066.355,1.5,1.5,0,0,1,.574.957l2.3,9.188H20.344l2.078-7.875h1.859l-2.3,8.313a1.5,1.5,0,0,1-.574.957,1.708,1.708,0,0,1-1.066.355H9.406A1.708,1.708,0,0,1,8.34-6.48a1.5,1.5,0,0,1-.574-.957l-2.3-9.187H3.5a.852.852,0,0,1-.629-.246.852.852,0,0,1-.246-.629.852.852,0,0,1,.246-.629A.852.852,0,0,1,3.5-18.375ZM17.391-5.359a2.531,2.531,0,0,1,1.859-.766,2.531,2.531,0,0,1,1.859.766A2.531,2.531,0,0,1,21.875-3.5a2.531,2.531,0,0,1-.766,1.859,2.531,2.531,0,0,1-1.859.766,2.531,2.531,0,0,1-1.859-.766A2.531,2.531,0,0,1,16.625-3.5,2.531,2.531,0,0,1,17.391-5.359Zm-7.875,0a2.531,2.531,0,0,1,1.859-.766,2.531,2.531,0,0,1,1.859.766A2.531,2.531,0,0,1,14-3.5a2.531,2.531,0,0,1-.766,1.859,2.531,2.531,0,0,1-1.859.766,2.531,2.531,0,0,1-1.859-.766A2.531,2.531,0,0,1,8.75-3.5,2.531,2.531,0,0,1,9.516-5.359ZM14-18.375h1.75v2.625h2.625V-14H15.75v2.625H14V-14H11.375v-1.75H14ZM12.25-3.5a.773.773,0,0,0-.875-.875A.773.773,0,0,0,10.5-3.5a.773.773,0,0,0,.875.875A.773.773,0,0,0,12.25-3.5Zm7.875,0a.773.773,0,0,0-.875-.875.773.773,0,0,0-.875.875.773.773,0,0,0,.875.875A.773.773,0,0,0,20.125-3.5Z" transform="translate(-2.625 18.375)" fill="gray"></path>
+                </svg>
+                <span class="ashade-woo-icon--a2c-progress"></span>
+                
+                <svg xmlns="http://www.w3.org/2000/svg" width="24.063" height="17.609" viewBox="0 0 24.063 17.609" class="ashade-woo-icon--a2c-done">
+                      <path data-name="Path 9" d="M.089-.069,7.124,6.916l15.7-15.8" transform="translate(0.263 9.234)" fill="none" stroke="#808080" stroke-width="2"></path>
+                </svg>
+            </a>
+                        </div><!-- .ashade-woo-loop-item__tools -->
+        </div><!-- .ashade-woo-loop-item__image-wrap -->
+        <div class="ashade-woo-loop-item__footer">
+        <h5 class="ashade-woo-loop-item__title">				<span><a href="/product-category/{{product['Category']['Name']}}/" rel="tag">Fashion</a></span>				
+            <a href="/product/{{product['Id']}}/">
+                {{product['Title']}}				</a>
+        </h5>			<div class="ashade-woo-loop-item__price">
+            
+        <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{{Product['Price']}}</bdi></span></span>
+        </div>
+        </div><!-- .ashade-woo-loop-item__footer -->
+        </div><!-- .ashade-product-loop-item -->
+        </li>
+    {%endfor%}
+
+        
+
+
+     
+
+
+        
+
+
+</ul>
+
+</section>
+</div>
+
+                <!-- Post Navs -->
+                <div class="clear"></div>
+                <nav class="ashade-post-nav"></nav>
+            </div><!-- .ashade-col -->
+                                </div><!-- .ashade-row -->
+    </div>
+
+
+{%endblock%}

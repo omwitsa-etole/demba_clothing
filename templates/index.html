@@ -1,0 +1,52 @@
+
+{%extends 'main.html'%}
+
+{%block content%}
+
+    <!-- Home Background -->
+    <div onclick="location.search='event=true'" class="ashade-home-background ashade-page-background is-video bg-video--cover" data-opacity="0.75">
+        <video  src="/static/bg.mp4" poster="/static/bg.mp4" webkit-playsinline="true" playsinline="true" muted autoplay loop>
+                </video>
+    </div>
+    <!-- .ashade-home-background -->
+    <!-- Home Title and Back Button -->
+    <div class="ashade-page-title-wrap is-inactive ">
+        <h1 class="ashade-page-title">&nbsp;</h1>
+    </div>
+    <!-- .ashade-page-title-wrap -->
+
+    <div class="ashade-home-return ashade-back-wrap is-inactive">
+        <div class="ashade-back is-home-return">
+            <a href="#" class="ashade-home-link--a" data-event="back">
+                <span>Return</span>
+                <span>Back</span>
+            </a>
+        </div>
+        <!-- .ashade-back -->
+    </div>
+    <!-- .ashade-home-return -->
+
+   
+     <a href="/feed" class="explore-link is-retina lg-link" data-event="works" id="explore-works">			       
+        <span>Explore </span>
+        </a>
+    <!-- Home Works Part -->
+  
+    <!-- .ashade-home-link-wrap -->
+
+   
+    <!-- #ashade-home-works -->
+    <!-- Home Contacts Part -->
+    <script src="/static/js/jquery.min.js"></script>
+   
+    <script>
+        jQuery(document).ready(function(){
+            jQuery("#navbar-nav").css("display","none")
+            if(window.location.search.includes("event=true")){
+                jQuery("#ashade-home-works").css("visibility","show");
+                jQuery$("#ashade-home-works").css("display","flex");
+                jQuery("#explore-works").css("display","none !important");
+            }
+        })
+        </script>
+    {%endblock%}

@@ -1,0 +1,66 @@
+.elementor-34 .elementor-element.elementor-element-161a975 {
+    margin-top: 0px;
+    margin-bottom: 150px;
+}
+
+.elementor-widget-text-editor {
+    color: var( --e-global-color-text);
+    font-family: var( --e-global-typography-text-font-family), Sans-serif;
+    font-weight: var( --e-global-typography-text-font-weight);
+}
+
+.elementor-widget-text-editor.elementor-drop-cap-view-stacked .elementor-drop-cap {
+    background-color: var( --e-global-color-primary);
+}
+
+.elementor-widget-text-editor.elementor-drop-cap-view-framed .elementor-drop-cap,
+.elementor-widget-text-editor.elementor-drop-cap-view-default .elementor-drop-cap {
+    color: var( --e-global-color-primary);
+    border-color: var( --e-global-color-primary);
+}
+
+.elementor-34 .elementor-element.elementor-element-956a87e {
+    text-align: center;
+}
+
+.elementor-widget-heading .elementor-heading-title {
+    color: var( --e-global-color-primary);
+    font-family: var( --e-global-typography-primary-font-family), Sans-serif;
+    font-weight: var( --e-global-typography-primary-font-weight);
+}
+
+.elementor-34 .elementor-element.elementor-element-19a42d2e>.elementor-widget-container {
+    margin: 0px 0px 10px 0px;
+}
+
+@media(max-width:1024px) and (min-width:768px) {
+    .elementor-34 .elementor-element.elementor-element-2a57914 {
+        width: 100%;
+    }
+    .elementor-34 .elementor-element.elementor-element-3a03237d {
+        width: 50%;
+    }
+    .elementor-34 .elementor-element.elementor-element-1f0ab0ca {
+        width: 50%;
+    }
+}
+
+@media(max-width:1024px) {
+    .elementor-34 .elementor-element.elementor-element-161a975 {
+        margin-top: 0px;
+        margin-bottom: 120px;
+    }
+    .elementor-34 .elementor-element.elementor-element-27e64fbe>.elementor-widget-container {
+        margin: 0px 0px 50px 0px;
+    }
+}
+
+@media(max-width:767px) {
+    .elementor-34 .elementor-element.elementor-element-161a975 {
+        margin-top: 0px;
+        margin-bottom: 100px;
+    }
+    .elementor-34 .elementor-element.elementor-element-2a57914 {
+        width: 100%;
+    }
+}

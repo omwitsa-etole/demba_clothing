@@ -1,0 +1,149 @@
+{%extends 'main.html'%}
+
+{%block content%}
+
+<main id="page-649" class="ashade-content-wrap post-649 page type-page status-publish hentry">
+    <div class="ashade-content-scroll is-centered"><div class="ashade-header-holder" style="height: 115px;"></div>
+                        <div class="ashade-content" style="min-height: 455px; transform: translate(0px, 0px); opacity: 1;"><div class="ashade-mobile-title-wrap">
+<h1 class="ashade-page-title">
+    <span>What is in your Cart</span>
+    Shopping Cart        </h1>
+</div>
+            <div class="ashade-row ">
+                <div class="ashade-col col-12">
+                    {%if manifest["cart_items"] == 0%}
+                    <div class="woocommerce"><div class="woocommerce-notices-wrapper"></div><div class="wc-empty-cart-message">
+                        <div class="cart-empty woocommerce-info">
+                        Your cart is currently empty.	</div>
+                        </div>	<p class="return-to-shop">
+                        <a class="button wc-backward" href="/shop">
+                            Return to shop		</a>
+                        </p>
+                    </div>
+                    {%endif%}
+                    							<!-- Post Navs -->
+                    <div class="clear"></div>
+                    <nav class="ashade-post-nav"></nav>
+                    <!-- Post Comments -->
+                                            </div><!-- .ashade-col -->
+                                    </div><!-- .ashade-row -->
+
+            {%if manifest['cart_items'] != 0%}
+            <div class="ashade-row ">
+                <div class="ashade-col col-12">
+                    <div class="woocommerce"><div class="woocommerce-notices-wrapper"></div><form class="woocommerce-cart-form ashade-wc-cart-form" action="/cart/" method="post">
+                        <div class="ashade-cart-page-wrap ashade-row" data-price-format="left" data-price-dec="." data-price-dec-num="2" data-price-sep="," data-price-symbol="KES">
+
+                        <div class="ashade-cart-page--content ashade-col col-8">
+                            
+                            <ul class="ashade-cart-listing woocommerce-cart-form__contents cart">
+                                {%for item in Items%}
+                                <li class="woocommerce-cart-form__cart-item cart_item">
+                                    <div class="ashade-cart-item-inner">
+                                        <div class="ashade-cart-item-info">
+                                            <div class="ashade-cart-item--thmb">
+                                                <a href="/product/{{item['Id']}}/"><img fetchpriority="high" decoding="async" width="640" height="640" src="{{API_URL}}{{item['imageURL']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="/wp-content/uploads/2020/01/masonry-2col-10-640x640.jpg 640w, {{API_URL}}{{item['imageURL']}} 100w, {{API_URL}}{{item['imageURL']}} 150w" sizes="(max-width: 640px) 100vw, 640px"></a>								</div><!-- .ashade-cart-item--thmb -->
+                                            <div class="ashade-cart-item--name" data-title="Product">
+                                                <h5>
+                                                    <span><span><a href="#" rel="tag"></a></span></span>
+                                                    <a href="/product/{{item['Id']}}/">{{item['Name']}}</a>									</h5>
+                                            </div><!-- .ashade-cart-item--product-name -->
+                                        </div><!-- .ashade-cart-item-info -->
+                                        <div class="ashade-cart-item--qty-wrap ">
+                                                                            <a href="javascript:void(0)" class="ashade-cart-item--qty-plus"></a>
+                                            <a href="javascript:void(0)" class="ashade-cart-item--qty-minus"></a>
+                                            <div class="quantity">
+                    <label class="screen-reader-text" for="quantity_681318c948df8">Eyes to Eyes quantity</label>
+                    <input type="number" id="quantity_681318c948df8" class="input-text qty text" name="cart[0d7de1aca9299fe63f3e0041f02638a3][qty]" value="{{item['Quantity']}}" aria-label="Product quantity" min="0" max="" step="1" placeholder="" inputmode="numeric" autocomplete="off">
+                    </div>
+                                            <h5 class="ashade-cart-item--qty-label">
+                                                                                    <span class="ashade-cart-item--qty">
+                                                    <span class="ashade-cart-item--qty-count">{{item['Quantity']}}</span>
+                                                    <span class="ashade-cart-item--qty-x">x</span>
+                                                    <span class="ashade-cart-item--qty-price" data-price="{{item['Price']}}"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(item['Price']*(1-item['Sale']/100))}}</bdi></span></span>
+                                                </span>
+                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>
+                                                    {{ "%.2f"|format((item['Price'] * (1 - item['Sale'] / 100)) * item['Quantity']) }}
+
+
+                                                </bdi></span>								
+                                            </h5>
+                                        </div><!-- .ashade-cart-item--qty -->
+                                    </div><!-- .ashade-cart-item-inner -->
+                                    
+                                    <div class="ashade-product-remove-wrap product-remove">
+                                        <a href="/api/cart/?remove_item={{item['Id']}}&amp;_wpnonce=2387bb7b90" class="ashade-cart-item--remove remove" aria-label="Remove this item" data-product_id="{{item['Id']}}" data-product_sku=""></a>						</div>
+                                </li>
+                                {%endfor%}
+                                                
+                                                </ul>
+                            <div class="ashade-cart-footer">
+                                <div class="ashade-cart-footer--lp">
+                                    <a href="/shop">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="9.844" height="17.625" viewBox="0 0 9.844 17.625">
+                                            <path id="prev" d="M2.25-17.812l1.125,1.125L-4.359-9,3.375-1.312,2.25-.187-6-8.437-6.469-9-6-9.562Z" transform="translate(6.469 17.813)" fill="#fff"></path>
+                                        </svg>
+                                        Continue Shopping					</a>
+                                </div><!-- .ashade-cart-footer--lp -->
+                                <div class="ashade-cart-footer--rp">
+                                                            <div class="ashade-coupon-wrap coupon">
+                                            <div class="ashade-coupon-wrap--input">
+                                                <label for="coupon_code">Coupon code</label>
+                                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Enter your code">
+                                            </div><!-- .ashade-coupon-wrap--input -->
+                                            <div class="ashade-coupon-wrap--button">
+                                                <button type="submit" class="button" name="apply_coupon">Apply Coupon</button>
+                                                                            </div><!-- .ashade-coupon-wrap--button -->
+                                        </div><!-- .ashade-coupon-wrap -->
+                                    <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="2387bb7b90"><input type="hidden" name="_wp_http_referer" value="/wp/ashade/cart/">				</div><!-- .ashade-cart-footer--rp -->
+                            </div><!-- .ashade-cart-footer -->
+                        </div><!-- .ashade-cart-page--content -->
+                        <div class="ashade-cart-page--total ashade-col col-4">
+                                        <div class="cart-collaterals">
+                                <div class="ashade-cart-totals ">
+
+
+                        <h4>
+                        <span>Shopping Summary</span>
+                        Cart Totals	</h4>
+
+                        <ul class="ashade-cart-total--list">
+                        <li class="ashade-ctl--subtotal">
+                            <span>Subtotal:</span>
+                            <span><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></span>
+                        </li>
+                                                <li class="order-total">
+                            <span>Total:</span>
+                            <span><strong><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></strong> </span>
+                        </li>
+                            </ul>
+                        <div class="ashade-wc-total-buttons">
+                        <div class="ashade-wc-total-buttons--lp">
+                            <button type="submit" class="button" name="update_cart" value="Update cart" disabled="">
+                                Update cart			</button>
+                            <input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="2387bb7b90"><input type="hidden" name="_wp_http_referer" value="/cart">		</div><!-- .ashade-wc-total-buttons--lp -->
+                        <div class="ashade-wc-total-buttons--rp">
+                            <div class="wc-proceed-to-checkout">
+                                <a href="/checkout/" class="checkout-button button alt wc-forward">
+                                    Checkout				</a>
+                            </div>
+                        </div><!-- .ashade-wc-total-buttons--rp -->
+                        </div><!-- .ashade-wc-total-buttons -->
+                        </div><!-- .ashade-cart-totals -->			</div>
+                        </div><!-- .ashade-cart-page--total -->
+                        </div><!-- .ashade-cart-page-wrap -->
+                        </form>
+                        </div>							<!-- Post Navs -->
+                                            <div class="clear"></div>
+                                            <nav class="ashade-post-nav"></nav>
+                                            <!-- Post Comments -->
+                                                                    </div><!-- .ashade-col -->
+                                                            </div>
+
+            {%endif%}
+        </div><!-- .ashade-content -->
+        
+    </div><!-- .ashade-content-scroll -->
+</main>
+
+{%endblock%}
