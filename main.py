@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = 'ussd'
 #app. = True
 #app.secret_key = 'ussd'
-API_URL = "https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
+API_URL = "http://82.29.190.14:50155"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
 
 ALL_FEED = []
 ALL_PRODUCT = []
