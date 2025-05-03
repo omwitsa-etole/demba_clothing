@@ -61,7 +61,7 @@
                 <div class="ashade-woo-loop-item__image-wrap">
                     
                 <span class="onsale">Sale!</span>
-                <a href="/product/{{pr['Id']}}">
+                <a href="/product/{{pr['id']}}">
                   <center>
                     <img fetchpriority="high" width="340" height="340" src="{{API_URL}}{{pr['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
                     srcset="{{API_URL}}{{pr['image_Url']}}" sizes="(max-width: 640px) 100vw, 640px">			</a>
@@ -103,8 +103,8 @@
                            {{pr['Title']}}				</a>
                     </h5>			<div class="ashade-woo-loop-item__price">
                         
-                <span class="price" style="font-size: 26px;" ><del aria-hidden="true" ><span class="woocommerce-Price-amount amount" style="display: none;"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{pr['Price']}}</bdi></span></del> <span class="screen-reader-text">
-                    Original price was: KES{{pr['Price']}}.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(pr['Price']*(1-pr['Sale']/100))}}</bdi></span></ins><span class="screen-reader-text">Current price is: ${{(pr['Price']*(1-pr['Sale']/100))}}.</span></span>
+                <span class="price" style="font-size: 26px;" ><del aria-hidden="true" ><span class="woocommerce-Price-amount amount" style="display: none;"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{pr['price']}}</bdi></span></del> <span class="screen-reader-text">
+                    Original price was: KES{{pr['Price']}}.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(pr['price']*(1-pr['sale']/100))}}</bdi></span></ins><span class="screen-reader-text">Current price is: ${{(pr['Price']*(1-pr['sale']/100))}}.</span></span>
                     </div>
                 </div><!-- .ashade-woo-loop-item__footer -->
                 </div><!-- .ashade-product-loop-item -->

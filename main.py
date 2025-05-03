@@ -4,7 +4,7 @@ import json
 import smtplib, ssl
 import os
 import sys
-from flask import Flask, request,make_response  ,session,render_template,jsonify
+from flask import Flask, request,make_response  ,session,render_template,jsonify,send_from_directory
 import os
 from flask_cors import CORS
 import httpx
@@ -116,6 +116,11 @@ async def fetch_data():
 
     if banner:
         ALL_BANNER += [f for f in banner if f not in ALL_BANNER]
+
+@app.route('/static/<path:filename>')
+def static_sample(filename):
+    static_dir = os.path.join(app.root_path, 'static')
+    return send_from_directory(static_dir, filename)
 
 
 @app.route("/api/cart/resendemail",methods=["POST"])
