@@ -47,12 +47,16 @@ async def fetch_cart():
     }
     items = []
     total = 0
-    rsession = requests.Session()
-    response = rsession.post(u,headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        items = data.get("Items")
-        total = data.get("Total")
+    try:
+        rsession = requests.Session()
+        response = rsession.post(u,headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            items = data.get("Items")
+            total = data.get("Total")
+    except Exception as e:
+        print(str(e))
+        pass
     print("cart=>",items)
     ITEMS_CART = items
     CART_ITEMS = len(items)
@@ -67,12 +71,16 @@ async def fetch_order(num):
     }
     items = None
     total = 0
-    rsession = requests.Session()
-    response = rsession.post(u,headers=headers)
-    if response.status_code == 200:
-        data = response.json()
-        items = data.get("Order")
-        total = data.get("Total")
+    try:
+        rsession = requests.Session()
+        response = rsession.post(u,headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            items = data.get("Order")
+            total = data.get("Total")
+    except Exception as e:
+        print(str(e))
+        pass
     print("order=>",items)
     return items
 
@@ -112,11 +120,15 @@ def resendemail():
     headers = {
         'Content-Type': 'application/json'
     }
-    response = requests.post(u,headers=headers)
-    #print(response.status_code)
-    if response.status_code == 200:
-        data = response.json()
-        return jsonify(data)
+    try:
+        response = requests.post(u,headers=headers)
+        #print(response.status_code)
+        if response.status_code == 200:
+            data = response.json()
+            return jsonify(data)
+    except Exception as e:
+        print(str(e))
+        pass
     return jsonify({'Success':False})
 
 @app.route("/api/add-to-cart/<string:id>")
@@ -132,20 +144,20 @@ def add_cart(id):
     headers = {
         'Content-Type': 'application/json'
     }
-    rsession = requests.Session()
+    try:
+        rsession = requests.Session()
 
-    # Optionally: manually set a cookie if you know it
-    #session.cookies.set('ASP.NET_SessionId', CURRENT_USER)  # optional
-    #if request.method == "POST":
-    #    name = request.form["name"]
-    data = {'Name': name,'Qnty':qnty,'Price':price,'Sale':sale,'Id':int(id),'Image_Url':img,'Stock':stock}
-    global CART_ITEMS
-    response = rsession.post(u,headers=headers,data=json.dumps(data))
-    if response.status_code == 200:
-        data = response.json()
-        print("data",data.get("Items"))
-        CART_ITEMS = int(data.get("Items"))
-        return jsonify(data)
+        data = {'Name': name,'Qnty':qnty,'Price':price,'Sale':sale,'Id':int(id),'Image_Url':img,'Stock':stock}
+        global CART_ITEMS
+        response = rsession.post(u,headers=headers,data=json.dumps(data))
+        if response.status_code == 200:
+            data = response.json()
+            print("data",data.get("Items"))
+            CART_ITEMS = int(data.get("Items"))
+            return jsonify(data)
+    except Exception as e:
+        print(str(e))
+        pass
 
 
     return jsonify({'Success':False,'Response':response.status_code})
@@ -266,13 +278,17 @@ async def checkout():
         data = {'Name': names,'Email':email,'FullAddress':faddr,'Description':desc,'Phone':phone}
         #global CART_ITEMS
         print("data",data)
-        response = rsession.post(u,headers=headers,data=json.dumps(data))
-        if response.status_code == 200:
-            data = response.json()
-            if data.get("Success") == True:
-                order = data.get("Order")
-                print("order=>",order)
-                return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL,Order=data.get("Order"),Total=data.get("Total"),EMAIL=email)    
+        try:
+            response = rsession.post(u,headers=headers,data=json.dumps(data))
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("Success") == True:
+                    order = data.get("Order")
+                    print("order=>",order)
+                    return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL,Order=data.get("Order"),Total=data.get("Total"),EMAIL=email)    
+        except Exception as e:
+            print(str(e))
+            pass
     return render_template("checkout.html",manifest=session["manifest"],API_URL=API_URL,ITEMS=ITEMS_CART,Total=total)
 
 
