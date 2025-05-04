@@ -212,7 +212,7 @@ async def cart():
     if 'manifest' not in session:
         session['manifest'] = {}
     session["manifest"]["cart_items"] = CART_ITEMS
-    return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=0,API_URL=API_URL)
+    return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=0,API_URL=API_URL+"/")
 
 @app.route("/shop")
 async def shop():
@@ -223,7 +223,7 @@ async def shop():
     print("product",ALL_PRODUCT)
     # [{'Id': 3, 'Title': 'DENIM JACKET', 'Material': None, 'Price': 2580, 'Sale': 12, 'Brand_Id': 3, 'Brand': 'OTHERS', 'Series': '28', 'Category': 'DENIM JACKET', 'SubCategory': 'HEAVY DENIM', 'Level': 'MEDIUM', 'EDetail': 'BEAUTIFUL DENIM JACKET',
     # 'Stock': '3', 'RelDate': '/Date(1745096400000)/', 'image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]
-    return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL,manifest=session["manifest"])
+    return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL+"/",manifest=session["manifest"])
 
 @app.route("/feed")
 async def feed():
@@ -235,7 +235,7 @@ async def feed():
    
 
     print("Feed=>",ALL_FEED)
-    return render_template("feed.html",feed=ALL_FEED,API_URL=API_URL,manifest=session["manifest"])
+    return render_template("feed.html",feed=ALL_FEED,API_URL=API_URL+"/",manifest=session["manifest"])
 
      #[{'Id': 1, 'Caption': 'Mas', 'Banner_Url': '/ImagesData/MainPageBanners/denim_full.png638815101281727486_1.png', 'Timestamp': '/Date(1745902528173)/'}, {'Id': 2, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_15_IMG_3505.JPG638815472860811741_1.JPG', 'Timestamp': '/Date(1745939686080)/'}, {'Id': 3, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_19_IMG_3510.JPG638815473531698146_1.JPG', 'Timestamp': '/Date(1745939753170)/'}]
 
@@ -265,11 +265,11 @@ def product(id):
     # 'Material': None, 'MegaPixel': '0', 'SensorFormat': '', 'EDetail': 'BEAUTIFUL DENIM JACKET', 'truck': False, 'bike': False, 'person': False, 'collect': True, 'Description': 'brown demin jacket. medium sized', 'AnnounceDate': '2025-04-20T00:00:00', 
     #'Images': 
     #[{'Id': 1, 'Caption': 'denim_jacket.png', 'Image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]}
-    return render_template("product.html",manifest=session["manifest"],Product=product,Related = related,API_URL=API_URL)
+    return render_template("product.html",manifest=session["manifest"],Product=product,Related = related,API_URL=API_URL+"/")
 
 @app.route("/product_category/<string:id>/")
 def category(id):
-    return render_template("product.html",manifest=session["manifest"],API_URL=API_URL)
+    return render_template("product.html",manifest=session["manifest"],API_URL=API_URL+"/")
 
 #@app.route("")
 @app.route("/checkout/",methods=["POST","GET"])
@@ -287,7 +287,7 @@ async def checkout():
         num = request.args.get("number")
         order = await fetch_order(num)
         print("order fetch=>",order)
-        return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL,Order=order,Total=total,EMAIL=order["Email"])    
+        return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["Email"])    
     if request.method == "POST":
         email = request.form["billing_email"]
         names = request.form["billing_first_name"]+" "+request.form["billing_last_name"]
@@ -313,11 +313,11 @@ async def checkout():
                 if data.get("Success") == True:
                     order = data.get("Order")
                     print("order=>",order)
-                    return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL,Order=data.get("Order"),Total=data.get("Total"),EMAIL=email)    
+                    return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=data.get("Order"),Total=data.get("Total"),EMAIL=email)    
         except Exception as e:
             print(str(e))
             pass
-    return render_template("checkout.html",manifest=session["manifest"],API_URL=API_URL,ITEMS=ITEMS_CART,Total=total)
+    return render_template("checkout.html",manifest=session["manifest"],API_URL=API_URL+"/",ITEMS=ITEMS_CART,Total=total)
 
 
 
