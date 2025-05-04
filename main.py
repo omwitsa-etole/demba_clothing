@@ -238,9 +238,9 @@ async def cart():
 async def shop():
     global ALL_PRODUCT
     
-    if len(ALL_PRODUCT) == 0:
+    if len(ALL_PRODUCT) == 0 or request.args.get("refresh") != None:
         await fetch_data()
-    print("product",ALL_PRODUCT)
+    #print("product",ALL_PRODUCT)
     # [{'Id': 3, 'Title': 'DENIM JACKET', 'Material': None, 'Price': 2580, 'Sale': 12, 'Brand_Id': 3, 'Brand': 'OTHERS', 'Series': '28', 'Category': 'DENIM JACKET', 'SubCategory': 'HEAVY DENIM', 'Level': 'MEDIUM', 'EDetail': 'BEAUTIFUL DENIM JACKET',
     # 'Stock': '3', 'RelDate': '/Date(1745096400000)/', 'image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]
     return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL+"/",manifest=session["manifest"])
@@ -254,7 +254,7 @@ async def feed():
     await fetch_data()
    
 
-    print("Feed=>",ALL_FEED)
+    #print("Feed=>",ALL_FEED)
     return render_template("feed.html",feed=ALL_FEED,API_URL=API_URL+"/",manifest=session["manifest"])
 
      #[{'Id': 1, 'Caption': 'Mas', 'Banner_Url': '/ImagesData/MainPageBanners/denim_full.png638815101281727486_1.png', 'Timestamp': '/Date(1745902528173)/'}, {'Id': 2, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_15_IMG_3505.JPG638815472860811741_1.JPG', 'Timestamp': '/Date(1745939686080)/'}, {'Id': 3, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_19_IMG_3510.JPG638815473531698146_1.JPG', 'Timestamp': '/Date(1745939753170)/'}]
