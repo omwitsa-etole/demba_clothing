@@ -128,7 +128,7 @@ Mpesa Payment</label>
     <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
 </div>
 </li>
-<li class="wc_payment_method payment_method_paypal" onclick="this.children[0].click()">
+<li class="wc_payment_method payment_method_paypal" onclick="this.children[0].click()" style="display: none;">
 <input id="payment_method_paypal" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="paypal" data-order_button_text="">
 
 <label for="payment_method_paypal">
@@ -137,7 +137,7 @@ Paypal 	</label>
     <p>You will be directed to your paypal account to complete transaction.</p>
 </div>
 </li>
-<li class="wc_payment_method payment_method_cod" onclick="this.children[0].click()">
+<li class="wc_payment_method payment_method_cod" onclick="this.children[0].click()" style="display: none;">
 <input id="payment_method_cod" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="cash" data-order_button_text="">
 
 <label for="payment_method_cod">

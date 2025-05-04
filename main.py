@@ -8,7 +8,7 @@ from flask import Flask, request,make_response  ,session,render_template,jsonify
 import os
 from flask_cors import CORS
 import httpx
-
+import isend as isp
 import json
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = 'ussd'
 #app. = True
 #app.secret_key = 'ussd'
-API_URL = "https://office.demba-clothing.com"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
+API_URL = "https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
 
 ALL_FEED = []
 ALL_PRODUCT = []
@@ -26,7 +26,24 @@ CART_ITEMS = 0
 ITEMS_CART = []
 CORS(app)
 
+@app.route("/api/pay/stk",methods=["POST"])
+async def pay_stk():
+    ph = request.args.get("phone")
+    em = request.args.get("email")
+    amt = request.args.get("amt")
+    desc = request.args.get("Narration")
+    isp.auth()
+    response = await isp.stk(ph,em,amt,desc)
+    
+    return jsonify(response)
 
+@app.route("/api/pay/status",methods=["POST"])
+async def pay_status():
+    iid = request.args.get("iid")
+    isp.auth()
+    response = await isp.status(iid)
+    
+    return jsonify(response)
 
 @app.before_request
 async def before_request_func():
