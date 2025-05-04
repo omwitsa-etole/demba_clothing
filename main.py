@@ -66,7 +66,9 @@ async def before_request_func():
             'title': "Demba Clothing",
             'cart_items':CART_ITEMS
         }
-    #else:
+    else:
+        if Session["manifest"]["cart_items"] == 0:
+            await fetch_cart()
 
 async def fetch_cart():
     global CART_ITEMS
@@ -80,7 +82,7 @@ async def fetch_cart():
     try:
         rsession = requests.Session()
         response = rsession.post(u,headers=headers)
-        print(response.status_code,"<=code")
+        #print(response.status_code,"<=code")
         if response.status_code == 200:
             data = response.json()
             items = data.get("items")
@@ -88,9 +90,11 @@ async def fetch_cart():
     except Exception as e:
         print(str(e))
         pass
-    print("cart=>",items)
+    #print("cart=>",items)
     ITEMS_CART = items
     CART_ITEMS = len(items)
+    if Session["manifest"] != None:
+        Session["manifest"]["cart_items"] = CART_ITEMS
 
 
 async def fetch_order(num):
