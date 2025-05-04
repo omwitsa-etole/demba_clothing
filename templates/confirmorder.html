@@ -289,6 +289,10 @@
     transform: scale(1.09);
   }
 }
+#btn-pay{
+    width: 75%;
+    margin-left: -45px;
+}
 </style>
 
 <div class="container" style="margin: 10% auto;">
@@ -304,7 +308,7 @@
 
     <!-- From Uiverse.io by ZstarPanda0210 --> 
 
-<div class="cardc"> 
+<div class="cardc" style="display: none;"> 
     
     <div class="header"> 
       <div class="image">
@@ -486,8 +490,11 @@
                     'callback':  "api/transaction/confirm",
                     'time': new Date(),
                 }
+                const queryParams = new URLSearchParams(window.location.search);
+
+                const num = queryParams.get('number');
                 //swal('Success!', 'Payment Request processed success', 'success');
-                alert('Payment Request processed success');
+                sendPay(current_phone,payment_amount,num,"{{EMAIL}}");
               //  clearInterval(intervalId);
             } catch (e) {
                 console.log(e);
@@ -504,7 +511,7 @@
     btn.setAttribute("id", "btn-pay")
     btn.innerHTML = "Pay Now"
     document.getElementById("cardb").children[0].appendChild(btn)
-
+   
 
     const addModal = (id) => {
         let el = `

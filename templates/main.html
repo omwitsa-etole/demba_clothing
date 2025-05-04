@@ -3333,6 +3333,9 @@
          font-family: 'Special Elite', cursive;
          color: white;
      }
+     body{
+        font-family: 'Special Elite', cursive !important;
+     }
      </style>
 </head>
 
@@ -3828,14 +3831,23 @@
 
         function AddCart(id,name,qnty,sale,price,img,stock){
             //console.log(id,name,qnty,sale,price);
-            fetchFunction(`/api/add-to-cart/${id}?name=${name}&qnty=${qnty}&sale=${sale}&price=${price}$stock=${stock}&imgurl=${img}`,"get",{},"",function(res){
+            fetchFunction(`/api/add-to-cart/${id}?name=${name}&qnty=${qnty}&sale=${sale}&price=${price}&stock=${stock}&imgurl=${img}`,"get",{},"",function(res){
                 console.log(res);
-                if(res.Success == true){
+                if(res.success == true){
                     console.log(jQuery("#added-"+id));
                     jQuery(".cartitems").html(res.Items);
                     jQuery("#added-"+id).css("opacity","1");
                     // /document.getElementById("cartitems").innerHTML = res.Items+"";
                 }
+            })
+        }
+
+        function sendPay(phone,amount,desc,email){
+            fetchFunction(`/api/pay/stk?phone=${phone}&amt=${amount}&email=${email}&desc=${desc}`,"post",{},"",function(res){
+                console.log(res);
+               // if(res.success == true){
+                    createAlert("Payment request initiated, complete to process payment.","success",4500);
+                //}
             })
         }
     </script>

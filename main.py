@@ -4,12 +4,25 @@ import json
 import smtplib, ssl
 import os
 import sys
-from flask import Flask, request,make_response  ,session,render_template,jsonify,send_from_directory
+from flask import Flask, request,make_response  ,session,render_template,jsonify,send_from_directory,redirect
 import os
 from flask_cors import CORS
 import httpx
 import isend as isp
 import json
+import getpass
+import socket
+import hashlib
+
+# Combine username and hostname
+user = getpass.getuser()
+host = socket.gethostname()
+
+# Create a short hash
+raw_id = f"{user}@{host}"
+short_id = hashlib.sha256(raw_id.encode()).hexdigest()[:8]  # 8-char unique ID
+
+CURRENT_USER = short_id
 
 app = Flask(__name__)
 
@@ -21,7 +34,7 @@ API_URL = "https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-fr
 ALL_FEED = []
 ALL_PRODUCT = []
 ALL_BANNER = []
-CURRENT_USER = "CurrentUser" 
+#CURRENT_USER = "CurrentUser" 
 CART_ITEMS = 0
 ITEMS_CART = []
 CORS(app)
@@ -31,7 +44,7 @@ async def pay_stk():
     ph = request.args.get("phone")
     em = request.args.get("email")
     amt = request.args.get("amt")
-    desc = request.args.get("Narration")
+    desc = request.args.get("desc")
     isp.auth()
     response = await isp.stk(ph,em,amt,desc)
     
@@ -67,10 +80,11 @@ async def fetch_cart():
     try:
         rsession = requests.Session()
         response = rsession.post(u,headers=headers)
+        print(response.status_code,"<=code")
         if response.status_code == 200:
             data = response.json()
-            items = data.get("Items")
-            total = data.get("Total")
+            items = data.get("items")
+            total = data.get("total")
     except Exception as e:
         print(str(e))
         pass
@@ -93,8 +107,8 @@ async def fetch_order(num):
         response = rsession.post(u,headers=headers)
         if response.status_code == 200:
             data = response.json()
-            items = data.get("Order")
-            total = data.get("Total")
+            items = data.get("order")
+            total = data.get("total")
     except Exception as e:
         print(str(e))
         pass
@@ -162,6 +176,7 @@ def resendemail():
 @app.route("/api/add-to-cart/<string:id>")
 def add_cart(id):
     print("adding",id)
+    global CART_ITEMS
     u = API_URL+"/api/cart/add?user="+CURRENT_USER
     name = request.args.get("name")
     qnty = request.args.get("qnty") 
@@ -176,12 +191,14 @@ def add_cart(id):
         rsession = requests.Session()
 
         data = {'Name': name,'Qnty':qnty,'Price':price,'Sale':sale,'Id':int(id),'Image_Url':img,'Stock':stock}
-        global CART_ITEMS
+        
         response = rsession.post(u,headers=headers,data=json.dumps(data))
         if response.status_code == 200:
             data = response.json()
-            print("data",data.get("items"))
-            CART_ITEMS = int(data.get("items"))
+            print("data",data)
+            CART_ITEMS = data.get("items")
+            if Session["manifest"] != None:
+                Session["manifest"]["cart_items"] = CART_ITEMS
             return jsonify(data)
     except Exception as e:
         print(str(e))
@@ -209,10 +226,13 @@ async def cart():
     global CART_ITEMS
     global ITEMS_CART
     await fetch_cart()
+    ttl = 0
     if 'manifest' not in session:
         session['manifest'] = {}
     session["manifest"]["cart_items"] = CART_ITEMS
-    return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=0,API_URL=API_URL+"/")
+    for i in ITEMS_CART:
+        ttl += i['payable']
+    return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=ttl,API_URL=API_URL+"/")
 
 @app.route("/shop")
 async def shop():
@@ -259,7 +279,7 @@ def product(id):
         data = response.json()
         print("product data",data)
         product = data.get("product")
-        related = data.get("others")["$values"]
+        related = data.get("others")
     print("prduct=>",related)
     # {'Id': 3, 'Title': 'DENIM JACKET', 'Stock': 3, 
     #'Brand': {'Id': 3, 'Name': 'OTHERS', 'Brand_Image': '/ImagesData/MainPageBanners/others.png638807481921931380_1.png'}, 
@@ -289,7 +309,7 @@ async def checkout():
         num = request.args.get("number")
         order = await fetch_order(num)
         print("order fetch=>",order)
-        return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["Email"])    
+        return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"])    
     if request.method == "POST":
         email = request.form["billing_email"]
         names = request.form["billing_first_name"]+" "+request.form["billing_last_name"]
@@ -312,10 +332,12 @@ async def checkout():
             response = rsession.post(u,headers=headers,data=json.dumps(data))
             if response.status_code == 200:
                 data = response.json()
-                if data.get("Success") == True:
-                    order = data.get("Order")
+                print("data res=>",data)
+                if data.get("success") == True:
+                    order = data.get("order")
                     print("order=>",order)
-                    return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=data.get("Order"),Total=data.get("Total"),EMAIL=email)    
+                    return redirect("/checkout?number="+order['orderNumber'])
+                    #return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=data.get("Total"),EMAIL=email)    
         except Exception as e:
             print(str(e))
             pass
