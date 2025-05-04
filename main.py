@@ -93,8 +93,8 @@ async def fetch_cart():
     #print("cart=>",items)
     ITEMS_CART = items
     CART_ITEMS = len(items)
-    if Session["manifest"] != None:
-        Session["manifest"]["cart_items"] = CART_ITEMS
+    if session["manifest"] != None:
+        session["manifest"]["cart_items"] = CART_ITEMS
 
 
 async def fetch_order(num):
@@ -201,8 +201,8 @@ def add_cart(id):
             data = response.json()
             print("data",data)
             CART_ITEMS = data.get("items")
-            if Session["manifest"] != None:
-                Session["manifest"]["cart_items"] = CART_ITEMS
+            if session["manifest"] != None:
+                session["manifest"]["cart_items"] = CART_ITEMS
             return jsonify(data)
     except Exception as e:
         print(str(e))
