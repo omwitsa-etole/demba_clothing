@@ -12,7 +12,17 @@
 </div>
                
             </div>
-        <ul class="products columns-3" style="">
+            {%if products|length == 0%}
+            <div class="woocommerce"><div class="woocommerce-notices-wrapper"></div><div class="wc-empty-cart-message">
+                <div class="cart-empty woocommerce-info">
+                Results is Empty.	</div>
+                </div>	<p class="return-to-shop">
+                <a class="button wc-backward" href="/shop">
+                   Browse with no filters		</a>
+                </p>
+            </div>
+            {%endif%}
+        <ul class="products columns-3" >
 
          <li style="display: none;" class="product type-product post-659 status-publish first instock product_cat-vehicles product_tag-car product_tag-commercial product_tag-photo product_tag-photography product_tag-sport has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple">
 <div class="ashade-woo-loop-item ashade-wc-tools--always">
