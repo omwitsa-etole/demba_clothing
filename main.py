@@ -180,8 +180,8 @@ def add_cart(id):
         response = rsession.post(u,headers=headers,data=json.dumps(data))
         if response.status_code == 200:
             data = response.json()
-            print("data",data.get("Items"))
-            CART_ITEMS = int(data.get("Items"))
+            print("data",data.get("items"))
+            CART_ITEMS = int(data.get("items"))
             return jsonify(data)
     except Exception as e:
         print(str(e))
@@ -256,8 +256,8 @@ def product(id):
     response = rsession.post(u,headers=headers)
     if response.status_code == 200:
         data = response.json()
-        product = data.get("Product")
-        related = data.get("Others")
+        product = data.get("product")
+        related = data.get("others")
     print("prduct=>",related)
     # {'Id': 3, 'Title': 'DENIM JACKET', 'Stock': 3, 
     #'Brand': {'Id': 3, 'Name': 'OTHERS', 'Brand_Image': '/ImagesData/MainPageBanners/others.png638807481921931380_1.png'}, 
@@ -282,7 +282,7 @@ async def checkout():
     print("cart",ITEMS_CART)
     total = 0
     for i in ITEMS_CART:
-        total += i['Payable']
+        total += i['payable']
     if request.args.get("number"):
         num = request.args.get("number")
         order = await fetch_order(num)
