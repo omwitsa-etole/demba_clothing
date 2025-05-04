@@ -67,7 +67,7 @@ async def before_request_func():
             'cart_items':CART_ITEMS
         }
     else:
-        if Session["manifest"]["cart_items"] == 0:
+        if session["manifest"]["cart_items"] == 0:
             await fetch_cart()
 
 async def fetch_cart():
