@@ -263,6 +263,19 @@ async def feed():
 def contact():
     return render_template("contact.html",manifest=session["manifest"])
 
+@app.route("/search")
+@app.route("/search/")
+async def search():
+    global ALL_PRODUCT
+    q = request.args.get("s")
+    if len(ALL_PRODUCT) == 0:
+        await fetch_data()
+    ps = []
+    for ap in ALL_PRODUCT:
+        if any(q.lower() in str(val).lower() for val in ap.values()):
+            ps.append(ap)
+    return render_template("shop.html",products=ps,API_URL=API_URL+"/",manifest=session["manifest"])
+
 
 @app.route("/product/<string:id>/")
 def product(id):
