@@ -256,6 +256,7 @@ def product(id):
     response = rsession.post(u,headers=headers)
     if response.status_code == 200:
         data = response.json()
+        print("data",data)
         product = data.get("product")
         related = data.get("others")
     print("prduct=>",related)
