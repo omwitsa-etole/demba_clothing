@@ -15,9 +15,9 @@
 <div class="ashade-single-product-gallery-wrap">
 <div class="ashade-single-product-image--large">
 
-        <a href="{{API_URL}}{{Product['images'][0]['image_Url']}}" class="ashade-lightbox-link " data-elementor-open-lightbox="no" data-gallery="product_{{Product['Id']}}" data-size="1000x1200" data-count="0">
-        <img fetchpriority="high" width="960" height="1152" src="{{API_URL}}{{Product['images'][0]['image_Url']}}" class="attachment-woocommerce_single size-woocommerce_single" alt="" decoding="async" 
-        srcset="{{API_URL}}{{Product['images'][0]['image_Url']}} 960w, {{API_URL}}{{Product['images'][0]['image_Url']}} 250w, {{API_URL}}{{Product['images'][0]['image_Url']}} 853w, {{API_URL}}{{Product['images'][0]['image_Url']}} 768w, {{API_URL}}{{Product['images'][0]['image_Url']}} 1000w" sizes="(max-width: 960px) 100vw, 960px"></a>	</div><!-- .ashade-single-product-gallery--large -->
+        <a href="{{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}}" class="ashade-lightbox-link " data-elementor-open-lightbox="no" data-gallery="product_{{Product['Id']}}" data-size="1000x1200" data-count="0">
+        <img fetchpriority="high" width="960" height="1152" src="{{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}}" class="attachment-woocommerce_single size-woocommerce_single" alt="" decoding="async" 
+        srcset="{{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}} 960w, {{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}} 250w, {{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}} 853w, {{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}} 768w, {{API_URL}}{{Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']}} 1000w" sizes="(max-width: 960px) 100vw, 960px"></a>	</div><!-- .ashade-single-product-gallery--large -->
 
 
 </div><!-- .ashade-single-product-gallery-wrap -->
@@ -32,7 +32,7 @@
 </div><!-- .ashade-single-product--title -->
 <div class="ashade-single-product--excerpt">
     <div class="woocommerce-product-details__short-description">
-        {{Product['EDetail']}}
+        {{Product['eDetail']}}
     </div>
 </div><!-- .ashade-single-product--excerpt -->
 <div class="ashade-single-product--qty">

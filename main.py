@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = 'ussd'
 #app. = True
 #app.secret_key = 'ussd'
-API_URL = "https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
+API_URL = "http://localhost:50155"#"https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
 
 ALL_FEED = []
 ALL_PRODUCT = []
@@ -250,15 +250,16 @@ def product(id):
     headers = {
         'Content-Type': 'application/json'
     }
-    product = None
+    product = {}
     related = []
     rsession = requests.Session()
     response = rsession.post(u,headers=headers)
+    print("u=>",u,response.status_code)
     if response.status_code == 200:
         data = response.json()
-        print("data",data)
+        print("product data",data)
         product = data.get("product")
-        related = data.get("others")
+        related = data.get("others")["$values"]
     print("prduct=>",related)
     # {'Id': 3, 'Title': 'DENIM JACKET', 'Stock': 3, 
     #'Brand': {'Id': 3, 'Name': 'OTHERS', 'Brand_Image': '/ImagesData/MainPageBanners/others.png638807481921931380_1.png'}, 
