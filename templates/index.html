@@ -4,9 +4,14 @@
 {%block content%}
 
     <!-- Home Background -->
-    <div onclick="location.search='event=true'" class="ashade-home-background ashade-page-background is-video bg-video--cover" data-opacity="0.75">
-        <video  src="/static/bg.mp4" poster="/static/bg.mp4" webkit-playsinline="true" playsinline="true" muted autoplay loop>
-                </video>
+    <div class="ashade-home-background ashade-page-background is-video bg-video--cover" data-opacity="0.75">
+       <video 
+        src="/static/bg.mp4"
+        poster="/static/bg.mp4"
+        webkit-playsinline playsinline muted autoplay loop
+        preload="none">
+        </video>
+
     </div>
     <!-- .ashade-home-background -->
     <!-- Home Title and Back Button -->
