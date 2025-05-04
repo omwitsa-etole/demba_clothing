@@ -3398,7 +3398,27 @@
     </header>
     {%block content%}
     {%endblock%}
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('img');
+        
+        images.forEach(img => {
+            if (!img.src) return;
     
+            // Skip protocol part (http:// or https://)
+            const url = new URL(img.src);
+            const fixedPath = url.pathname.replace(/(\/{2,}|\\{1,})/g, '/');
+    
+            // Rebuild and set the cleaned src
+            const cleanUrl = `${url.origin}${fixedPath}${url.search}${url.hash}`;
+            if (img.src !== cleanUrl) {
+                console.log(`Fixing src: ${img.src} → ${cleanUrl}`);
+                img.src = cleanUrl;
+            }
+        });
+    });
+    </script>
+        
     <!-- #ashade-home-contacts -->
     <footer id="ashade-footer" class="ashade-main-footer">
         <div class="ashade-footer-inner ashade-footer-2col">

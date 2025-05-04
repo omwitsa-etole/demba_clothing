@@ -50,7 +50,7 @@
 {%set pname = Product["title"]%}
 {%set psale = Product["sale"]%}
 {%set price = Product["price"]%}
-{%set img = Product['image_Url']%}
+{%set img = Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']%}
 {%set stock = Product['stock']%}
 <div class="ashade-single-add2cart--button ">
 <button type="button"  onclick="AddCart('{{pid}}','{{pname}}',jQuery('#quantity_{{PID}}').val(),'{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" name="add-to-cart" value="{{Product['id']}} " class="single_add_to_cart_button button alt">Add to cart</button>
@@ -148,8 +148,8 @@ Description	</h3>
         <div class="ashade-woo-loop-item ashade-wc-tools--always">
         <div class="ashade-woo-loop-item__image-wrap">
                     <a href="/product/{{product['td']}}/">
-            <img width="640" height="640" src="{{API_URL}}{{product['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async"
-             srcset="{{API_URL}}{{product['image_Url']}} 640w, {{API_URL}}{{product['image_Url']}} 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
+            <img width="640" height="640" src="{{API_URL}}{{product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async"
+             srcset="{{API_URL}}{{product['image_Url']}} 640w, {{API_URL}}{{product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']}} 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
         <div class="ashade-wc-loop-item__view"  id="added-{{product['Id']}}">
             <h6>
                 <span>Item Added</span>

@@ -63,8 +63,8 @@
                 <span class="onsale">Sale!</span>
                 <a href="/product/{{pr['id']}}">
                   <center>
-                    <img fetchpriority="high" width="340" height="340" src="{{API_URL}}{{pr['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
-                    srcset="{{API_URL}}{{pr['image_Url']}}" sizes="(max-width: 640px) 100vw, 640px">			</a>
+                    <img fetchpriority="high" width="340" height="340" src="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
+                    srcset="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" sizes="(max-width: 640px) 100vw, 640px">			</a>
                 </center>
                     <div class="ashade-wc-loop-item__view" id="added-{{pr['id']}}">
                         <h6>
@@ -83,7 +83,7 @@
                                         {%set pname = pr["title"]%}
                                         {%set psale = pr["sale"]%}
                                         {%set price = pr["Price"]%}
-                                        {%set img = pr['image_Url']%}
+                                        {%set img = pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] %}
                                         {%set stock = pr['stock']%}
                                         <a href="#" onclick="AddCart('{{pid}}','{{pname}}','1','{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" class="button ashade-woo-loop-item__add2cart product_type_simple add_to_cart_button" data-product_id="686" data-product_sku="" aria-label="Add to cart: “{{pr['title']}}”" rel="nofollow">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21.656" height="17.5" viewBox="0 0 21.656 17.5" class="ashade-woo-icon--a2c">
