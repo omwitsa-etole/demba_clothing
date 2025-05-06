@@ -66,9 +66,9 @@ async def before_request_func():
             'title': "Demba Clothing",
             'cart_items':CART_ITEMS
         }
-    else:
-        if session["manifest"]["cart_items"] == 0:
-            await fetch_cart()
+    #else:
+    #    #if session["manifest"]["cart_items"] == 0:
+    #    #    await fetch_cart()
 
 async def fetch_cart():
     global CART_ITEMS
