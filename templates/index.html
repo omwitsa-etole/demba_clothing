@@ -4,15 +4,57 @@
 {%block content%}
 
     <!-- Home Background -->
-    <div class="ashade-home-background ashade-page-background is-video bg-video--cover" data-opacity="0.75">
+    <div id="video-bg" class="ashade-home-background ashade-page-background is-video bg-video--cover" data-opacity="0.75">
        <video 
-        src="/static/bg.mp4"
+        
         poster="/static/bg.mp4"
         webkit-playsinline playsinline muted autoplay loop
         preload="none">
         </video>
 
     </div>
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const videoContainer = document.getElementById("video-bg");
+
+		fetch("/static/bg.mp4")
+			.then(response => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.blob();
+			})
+			.then(blob => {
+				const videoUrl = URL.createObjectURL(blob);
+				const video = document.createElement("video");
+				videoContainer.innerHTML = "";
+				
+         		 video.muted = true;
+				video.autoplay = true;
+				video.loop = true;
+				video.playsInline = true;
+				video.src = videoUrl;
+				video.src = videoUrl;
+				video.poster = "/static/bg.mp4"; // Replace with an actual image if needed
+				video.setAttribute("playsinline", "");
+				video.setAttribute("webkit-playsinline", "");
+				video.setAttribute("muted", "");
+				video.setAttribute("autoplay", "");
+				video.setAttribute("loop", "");
+				video.setAttribute("preload", "auto"); // Better preload control
+
+				videoContainer.appendChild(video);
+				video.play().catch(err => {
+					console.warn("Autoplay failed, possibly blocked:", err);
+				});
+			})
+			.catch(error => {
+				console.error("Error loading video:", error);
+			});
+	});
+
+	</script>
+
     <!-- .ashade-home-background -->
     <!-- Home Title and Back Button -->
     <div class="ashade-page-title-wrap is-inactive ">
