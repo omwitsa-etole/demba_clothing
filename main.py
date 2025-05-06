@@ -39,6 +39,13 @@ CART_ITEMS = 0
 ITEMS_CART = []
 CORS(app)
 
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    response = make_response(send_from_directory('static', filename))
+    response.headers['Cache-Control'] = 'public, max-age=36000' 
+    response.headers['Expires'] = 'Thu, 31 Dec 2025 23:55:55 GMT'
+    return response
+
 @app.route("/api/pay/stk",methods=["POST"])
 async def pay_stk():
     ph = request.args.get("phone")
