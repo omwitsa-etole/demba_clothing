@@ -125,16 +125,19 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
 <label for="payment_method_mpesa">
 Mpesa Payment</label>
     <div class="payment_box payment_method_mpesa pmodes">
-    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+    <p>Make your payment directly from your mpesa account. 
+        Please use your Order ID as the payment reference. 
+        Your order will not be shipped until the funds have cleared in our account.</p>
 </div>
 </li>
-<li class="wc_payment_method payment_method_paypal" onclick="this.children[0].click()" style="display: none;">
-<input id="payment_method_paypal" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="paypal" data-order_button_text="">
+<li class="wc_payment_method payment_method_paypal" onclick="this.children[0].click()">
+<input id="payment_method_paypal" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="card" data-order_button_text="">
 
 <label for="payment_method_paypal">
-Paypal 	</label>
+Card 	</label>
     <div class="payment_box payment_method_paypal pmodes" style="display:none;">
-    <p>You will be directed to your paypal account to complete transaction.</p>
+    <p>A checkout link will be generated to complete your payment.Please use your Order ID as the payment reference. 
+        Your order will not be shipped until the funds have cleared in our account</p>
 </div>
 </li>
 <li class="wc_payment_method payment_method_cod" onclick="this.children[0].click()" style="display: none;">

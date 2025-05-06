@@ -24,11 +24,14 @@
             {%endif%}
         <ul class="products columns-3" >
 
-         <li style="display: none;" class="product type-product post-659 status-publish first instock product_cat-vehicles product_tag-car product_tag-commercial product_tag-photo product_tag-photography product_tag-sport has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple">
+         <li style="display: none;"  class="product type-product post-659 status-publish first instock product_cat-vehicles product_tag-car product_tag-commercial product_tag-photo product_tag-photography product_tag-sport has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple"
+         style="max-width: 340px;"
+         >
 <div class="ashade-woo-loop-item ashade-wc-tools--always">
 <div class="ashade-woo-loop-item__image-wrap">
                 <a href="/product/alpine">
-        <img fetchpriority="high" width="640" height="640" src="/wp-content/uploads/2020/01/grid-2col-02-640x640.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" srcset="/wp-content/uploads/2020/01/grid-2col-02-640x640.jpg 640w, /wp-content/uploads/2020/01/grid-2col-02-100x100.jpg 100w, /wp-content/uploads/2020/01/grid-2col-02-150x150.jpg 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
+        <img fetchpriority="high" height="368"  src="/static/wp-content/uploads/2020/01/masonry-4col-01-1024x819.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
+        srcset="/static/wp-content/uploads/2020/01/masonry-4col-01-1024x819.jpg 640w, /static/wp-content/uploads/2020/01/masonry-4col-01-1024x819.jpg 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
     <div class="ashade-wc-loop-item__view">
         <h6>
             <span>Item Added</span>
@@ -66,14 +69,16 @@
 </li>
             {%for pr in products%}
             
-            <li class="product type-product post-686 status-publish instock product_cat-nature product_tag-nature product_tag-photo product_tag-photography product_tag-travel has-post-thumbnail sale downloadable shipping-taxable purchasable product-type-simple">
+            <li class="product type-product post-686 status-publish instock product_cat-nature product_tag-nature product_tag-photo product_tag-photography product_tag-travel has-post-thumbnail sale downloadable shipping-taxable purchasable product-type-simple"
+            style="max-width: 368px;"
+            >
                 <div class="ashade-woo-loop-item ashade-wc-tools--always">
                 <div class="ashade-woo-loop-item__image-wrap">
                     
                 <span class="onsale">Sale!</span>
                 <a href="/product/{{pr['id']}}">
                   <center>
-                    <img fetchpriority="high" width="340" height="340" src="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
+                    <img fetchpriority="high" src="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
                     srcset="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" sizes="(max-width: 640px) 100vw, 640px">			</a>
                 </center>
                     <div class="ashade-wc-loop-item__view" id="added-{{pr['id']}}">
