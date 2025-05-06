@@ -26,7 +26,7 @@
     <h3>
         {{Product['title']}} 			</h3>
     <div class="ashade-single-product--price">
-        <span><p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{{Product['Price']}}</bdi></span></p>
+        <span><p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Product['price']*manifest['rate']}}</bdi></span></p>
 </span>
     </div><!-- .ashade-single-product--price -->
 </div><!-- .ashade-single-product--title -->
@@ -53,11 +53,22 @@
 {%set img = Product['image_Url'][1:] if Product['image_Url'].startswith('/') else Product['image_Url']%}
 {%set stock = Product['stock']%}
 <div class="ashade-single-add2cart--button ">
-<button type="button"  onclick="AddCart('{{pid}}','{{pname}}',jQuery('#quantity_{{PID}}').val(),'{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" name="add-to-cart" value="{{Product['id']}} " class="single_add_to_cart_button button alt">Add to cart</button>
+<button type="button"  onclick="AddCart('{{pid}}','{{pname}}',document.getElementById('quantity_{{pid}}').value,'{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" name="add-to-cart" value="{{Product['id']}} " class="single_add_to_cart_button button alt">Add to cart</button>
 </div><!-- .ashade-single-add2cart--button -->
 
 </form>
 
+
+<div class="container">
+    <div class="row">
+        {% for im in Product['images'] %}
+            {% set img = im['image_Url'][1:] if im['image_Url'].startswith('/') else im['image_Url'] %}
+            <div class="col-auto">
+                <img src="{{ img }}" class="img-fluid" style="max-height: 150px;max-width: 189px;" alt="Product Image">
+            </div>
+        {% endfor %}
+    </div>
+    </div>
 
 </div><!-- .ashade-single-product--qty -->
 <div class="ashade-single-product--tags" style="display:none;">
@@ -65,6 +76,7 @@
 </div><!-- .entry-summary -->
 <div class="clear"></div>
 </div><!-- .ashade-single-product--main -->
+
 
 <div class="ashade-wc-tabs-wrap wc-tabs-wrapper">
 <ul class="ashade-wc-tabs wc-tabs" role="tablist">
@@ -187,7 +199,7 @@ Description	</h3>
                 {{product['title']}}				</a>
         </h5>			<div class="ashade-woo-loop-item__price">
             
-        <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>{{Product['Price']}}</bdi></span></span>
+        <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Product['price']*manifest['rate']}}</bdi></span></span>
         </div>
         </div><!-- .ashade-woo-loop-item__footer -->
         </div><!-- .ashade-product-loop-item -->

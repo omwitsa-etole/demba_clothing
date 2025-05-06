@@ -32,7 +32,7 @@
             <div class="ashade-row ">
                 <div class="ashade-col col-12">
                     <div class="woocommerce"><div class="woocommerce-notices-wrapper"></div><form class="woocommerce-cart-form ashade-wc-cart-form" action="/cart/" method="post">
-                        <div class="ashade-cart-page-wrap ashade-row" data-price-format="left" data-price-dec="." data-price-dec-num="2" data-price-sep="," data-price-symbol="KES">
+                        <div class="ashade-cart-page-wrap ashade-row" data-price-format="left" data-price-dec="." data-price-dec-num="2" data-price-sep="," data-price-symbol="{{manifest['currency']}}">
 
                         <div class="ashade-cart-page--content ashade-col col-8">
                             
@@ -60,10 +60,10 @@
                                                                                     <span class="ashade-cart-item--qty">
                                                     <span class="ashade-cart-item--qty-count">{{item['quantity']}}</span>
                                                     <span class="ashade-cart-item--qty-x">x</span>
-                                                    <span class="ashade-cart-item--qty-price" data-price="{{item['price']}}"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{(item['price']*(1-item['sale']/100))}}</bdi></span></span>
+                                                    <span class="ashade-cart-item--qty-price" data-price="{{item['price']}}"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{(manifest['rate']*item['price']*(1-item['sale']/100))}}</bdi></span></span>
                                                 </span>
-                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>
-                                                    {{ "%.2f"|format((item['price'] * (1 - item['sale'] / 100)) * item['quantity']) }}
+                                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>
+                                                    {{ "%.2f"|format((item['price'] * (1 - item['sale'] / 100)) * item['quantity']*manifest['rate']) }}
 
 
                                                 </bdi></span>								
@@ -110,11 +110,11 @@
                         <ul class="ashade-cart-total--list">
                         <li class="ashade-ctl--subtotal">
                             <span>Subtotal:</span>
-                            <span><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></span>
+                            <span><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Total*manifest['rate']}}</bdi></span></span>
                         </li>
                                                 <li class="order-total">
                             <span>Total:</span>
-                            <span><strong><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></strong> </span>
+                            <span><strong><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Total*manifest['rate']}}</bdi></span></strong> </span>
                         </li>
                             </ul>
                         <div class="ashade-wc-total-buttons">

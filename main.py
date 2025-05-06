@@ -29,7 +29,7 @@ app = Flask(__name__)
 app.secret_key = 'ussd'
 #app. = True
 #app.secret_key = 'ussd'
-API_URL = "https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
+API_URL = "http://localhost:50155"#"https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-free.app"#"http://localhost:64634"
 
 ALL_FEED = []
 ALL_PRODUCT = []
@@ -65,17 +65,53 @@ async def pay_status():
     
     return jsonify(response)
 
+EX_RATE = 0.008
 @app.before_request
 async def before_request_func():
     global CART_ITEMS
     if session.get("manifest") == None:
+        cd = get_country_code()
+        curr = "KES"
+        if cd == "KE":
+            rt = 1
+        else:
+            rt = EX_RATE
+            curr = "USD"
         session["manifest"] = {
             'title': "Demba Clothing",
-            'cart_items':CART_ITEMS
+            'cart_items':CART_ITEMS,
+            'country':cd,
+            "rate":rt,
+            "currency":curr
+        }
+    #if CART_ITEMS == 0 or CART_ITEMS > 0:
+    elif session["manifest"].get("rate") == None:
+        cd = get_country_code()
+        curr = "KES"
+        if cd == "KE":
+            rt = 1
+        else:
+            rt = EX_RATE
+            curr = "USD"
+        session["manifest"] = {
+            'title': "Demba Clothing",
+            'cart_items':CART_ITEMS,
+            'country':cd,
+            "rate":rt,
+            "currency":curr
         }
     #else:
     #    #if session["manifest"]["cart_items"] == 0:
     #    #    await fetch_cart()
+
+@app.route("/api/getcountry")
+def get_country_code():
+    session = None
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    if ip == "127.0.0.1":
+        return "KES"
+    res = requests.get(f'https://ipapi.co/{ip}/country/')
+    return res.text
 
 async def fetch_cart():
     global CART_ITEMS
@@ -240,7 +276,7 @@ async def cart():
     ttl = 0
     if 'manifest' not in session:
         session['manifest'] = {}
-    session["manifest"]["cart_items"] = CART_ITEMS
+    #session["manifest"]["cart_items"] = CART_ITEMS
     for i in ITEMS_CART:
         ttl += i['payable']
     return render_template("cart.html",manifest=session["manifest"],Items=ITEMS_CART,Total=ttl,API_URL=API_URL+"/")

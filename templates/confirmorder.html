@@ -291,7 +291,7 @@
 }
 #btn-pay{
     width: 75%;
-    margin-left: -45px;
+   
 }
 </style>
 
@@ -337,7 +337,7 @@
             <h2>Payment Methods</h2>
             <a onclick="getPayment()" style="cursor: pointer;display:none;text-decoration: none;color: white;position: absolute;bottom: 4px;right: 4px;">Refresh</a>
         </div>
-        <div class="booking-history" style="position: relative;width: 100%;">
+        <div class="booking-history" id="carbk" style="position: relative;width: 100%;">
             <div id="payment-methods"></div>
             <a class="payment-add" data-toggle="modal" onclick="mpesaModal()" data-target="#mpesaModal" href="#payments">
                 <i class="fas fa-plus"></i>Add Method
@@ -510,7 +510,7 @@
     //invoice = data.invoice._id;
     btn.setAttribute("id", "btn-pay")
     btn.innerHTML = "Pay Now"
-    document.getElementById("cardb").children[0].appendChild(btn)
+    document.getElementById("carbk").children[0].appendChild(btn)
    
 
     const addModal = (id) => {

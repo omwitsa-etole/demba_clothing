@@ -90,7 +90,7 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
                             <span class="product-name">
                                 &nbsp;{{item['name']}}					 <strong class="product-quantity">×&nbsp;{{item['quantity']}}</strong>									</span>
                             <span class="product-total">
-                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{item['payable']}}</bdi></span>				</span>
+                                <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}} </span>{{item['payable']*manifest['rate']}}</bdi></span>				</span>
                         </li>
 
                     {%endfor%}
@@ -99,7 +99,7 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
 <ul>
     <li class="cart-subtotal">
         <span>Subtotal</span>
-        <span><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></span>
+        <span><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Total*manifest['rate']}}</bdi></span></span>
     </li>
 
     
@@ -109,7 +109,7 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
     
     <li class="order-total">
         <span>Total</span>
-        <span><strong><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">KES</span>{{Total}}</bdi></span></strong> </span>
+        <span><strong><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">{{manifest["currency"]}}</span>{{Total*manifest['rate']}}</bdi></span></strong> </span>
     </li>
 </ul>
 </li>

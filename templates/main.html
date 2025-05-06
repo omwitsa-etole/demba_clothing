@@ -3821,12 +3821,12 @@
         }
 
         function AddCart(id,name,qnty,sale,price,img,stock){
-            //console.log(id,name,qnty,sale,price);
+            console.log(id,name,qnty,sale,price);
             fetchFunction(`/api/add-to-cart/${id}?name=${name}&qnty=${qnty}&sale=${sale}&price=${price}&stock=${stock}&imgurl=${img}`,"get",{},"",function(res){
                 console.log(res);
                 if(res.success == true){
                     console.log(jQuery("#added-"+id));
-                    jQuery(".cartitems").html(res.Items);
+                    jQuery(".cartitems").html(res.items);
                     jQuery("#added-"+id).css("opacity","1");
                     // /document.getElementById("cartitems").innerHTML = res.Items+"";
                 }
