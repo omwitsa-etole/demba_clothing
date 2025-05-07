@@ -17,7 +17,7 @@
                 </p>
             </div>
             {%endif%}
-        <ul class="products columns-3" style="width: 80%;margin-left: 10%;" >
+        <ul class="products columns-3" style="width: 86%;margin-left: 7%;display:flex;flex-direction: row;flex-wrap: wrap;" >
 
          <li style="display: none;"  class="product type-product post-659 status-publish first instock product_cat-vehicles product_tag-car product_tag-commercial product_tag-photo product_tag-photography product_tag-sport has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple"
          style="max-width: 340px;"
@@ -65,15 +65,14 @@
             {%for pr in products%}
             
             <li class="product type-product post-686 status-publish instock product_cat-nature product_tag-nature product_tag-photo product_tag-photography product_tag-travel has-post-thumbnail sale downloadable shipping-taxable purchasable product-type-simple"
-            style="max-width: 368px;"
+            style="max-width: 348px;"
             >
                 <div class="ashade-woo-loop-item ashade-wc-tools--always">
                 <div class="ashade-woo-loop-item__image-wrap">
-                    
-                <span class="onsale">Sale!</span>
+               
                 <a href="/product/{{pr['id']}}">
                   <center>
-                    <img fetchpriority="high" src="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
+                    <img loading="lazy" src="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Alpine" decoding="async" 
                     srcset="{{API_URL}}{{ pr['image_Url'][1:] if pr['image_Url'].startswith('/') else pr['image_Url'] }}" sizes="(max-width: 640px) 100vw, 640px">			</a>
                 </center>
                     <div class="ashade-wc-loop-item__view" id="added-{{pr['id']}}">
