@@ -173,7 +173,7 @@ Description	</h3>
             {%set pname = product["title"]%}
             {%set psale = product["sale"]%}
             {%set price = product["price"]%}
-            {%set img = product['image_Url']%}
+            {%set img = product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']%}
             {%set stock = Product['stock']%}
                             <a href="{{API_URL}}{{img}}" data-elementor-open-lightbox="no" data-caption="Fashion Coat - $14.99" data-size="1920x1280" class="ashade-lightbox-link ashade-woo-loop-item__details" data-count="0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22.531" height="22.531" viewBox="0 0 22.531 22.531">

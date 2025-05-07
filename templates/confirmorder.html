@@ -417,7 +417,9 @@
     function getPayment() {
         const body = document.getElementById('payment-methods');
         var ph = "{{Order['phone']}}";
-        body.innerHTML += `
+        var md = "{{Method}}";
+        if(md.toLocaleLowerCase() != "card"){
+          body.innerHTML += `
             <div class="trip" onclick="document.getElementById('${ph}').checked=true">
                 <div class="trip-details">
                     <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
@@ -434,10 +436,29 @@
                 </p>
 
             </div>
-            `
-       // fetchData("api/models/user/getPayments", function (datas) {
+            `;
+        }else{
+          body.innerHTML += `
+            <div class="trip" onclick="document.getElementById('${ph}').checked=true">
+                <div class="trip-details">
+                    <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
+                    <span class="payment-title">${"CARD PAY"} <span ></span></span>
+                    <span class="payment-desc">${"{{EMAIL}}"} <span ></span></span>
+                </div>
+                <p class="amount">
+                    <div class="form-check">
+                       
+                        <label class="form-check-label" for="${ph}">
+                          Click this
+                        </label><a class="form-control" href="{{PAY_URL}}">Payment Link</a>
+                        </div>
 
+                </p>
 
+            </div>
+            `;
+        }
+        
 
 
     }

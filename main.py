@@ -353,6 +353,82 @@ def product(id):
 def category(id):
     return render_template("product.html",manifest=session["manifest"],API_URL=API_URL+"/")
 
+
+@app.route("/order/webhook",methods=["GET","POST"])
+@app.route("/order/webhook/",methods=["GET","POST"])
+def webhook(num):
+    
+    if request.method == "POST":
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid or missing JSON"}), 400
+        print("data response hook=>",data)
+        invoice_id = data.get("invoice_id")
+        state = data.get("state")
+        account = data.get("account")
+        value = data.get("value")
+        currency = data.get("currency")
+        provider = data.get("provider")
+        u = API_URL+"/api/cart/confirm?order="+invoice_id
+        payload = {'invoice':invoice_id,'state':state,'email':account,'currency':currency,'amount':value,'provider':provider}
+
+        try:
+            response = rsession.post(u,headers=headers,data=json.dumps(payload))
+            if response.status_code == 200:
+                data = response.json()
+                print("data response from server=>",data)
+                return jsonify(data)
+                #if data.get("success") == True:
+                #    #order = data.get("order")
+                #    #print("order=>",order)
+                #    #return redirect("/checkout?number="+order['orderNumber']+"&method="+request.form["payment_method"])
+                #    #return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=data.get("Total"),EMAIL=email)    
+        except Exception as e:
+            print(str(e))
+            pass
+@app.route("/order/success/<string:num>",methods=["GET","POST"])
+@app.route("/order/success/<string:num>/",methods=["GET","POST"])
+def confirm_order(num):
+    print(num)
+    u = API_URL+"/api/cart/confirm?order="+num
+    if request.method == "POST":
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid or missing JSON"}), 400
+
+        invoice_id = data.get("invoice_id")
+        state = data.get("state")
+        account = data.get("account")
+        value = data.get("value")
+        currency = data.get("currency")
+        provider = data.get("provider")
+        payload = {'invoice':invoice_id,'state':state,'email':account,'currency':currency,'amount':value,'provider':provider}
+
+        try:
+            response = rsession.post(u,headers=headers,data=json.dumps(payload))
+            if response.status_code == 200:
+                data = response.json()
+                print("data res=>",data)
+                return jsonify(data)
+                #if data.get("success") == True:
+                #    #order = data.get("order")
+                #    #print("order=>",order)
+                #    #return redirect("/checkout?number="+order['orderNumber']+"&method="+request.form["payment_method"])
+                #    #return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=data.get("Total"),EMAIL=email)    
+        except Exception as e:
+            print(str(e))
+            pass
+
+@app.route("/track/<string:num>")
+async def track(num):
+    global ALL_PRODUCT
+    u = API_URL+"/api/cart/checkout?num="+num
+    order = await fetch_order(num)
+    if len(ALL_PRODUCT) == 0:
+        await fetch_data()
+    return render_template("trackorder.html",Products=ALL_PRODUCT,manifest=session["manifest"],API_URL=API_URL+"/",Order=order,EMAIL=order["email"])    
+
+
 #@app.route("")
 @app.route("/checkout/",methods=["POST","GET"])
 @app.route("/checkout",methods=["POST","GET"])
@@ -366,10 +442,14 @@ async def checkout():
     for i in ITEMS_CART:
         total += i['payable']
     if request.args.get("number"):
+        mthd = "mpesa"
+        if request.args.get("method"):
+            mthd = request.args.get("method")
         num = request.args.get("number")
         order = await fetch_order(num)
-        print("order fetch=>",order)
-        return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"])    
+        #print("order fetch=>",order)
+        url = await isp.get_url(order['phone'],order['email'],order['amount'],order['orderNumber'])
+        return render_template("confirmorder.html",manifest=session["manifest"],PAY_URL = url,API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"],Method=method)    
     if request.method == "POST":
         email = request.form["billing_email"]
         names = request.form["billing_first_name"]+" "+request.form["billing_last_name"]
@@ -396,7 +476,7 @@ async def checkout():
                 if data.get("success") == True:
                     order = data.get("order")
                     print("order=>",order)
-                    return redirect("/checkout?number="+order['orderNumber'])
+                    return redirect("/checkout?number="+order['orderNumber']+"&method="+request.form["payment_method"])
                     #return render_template("confirmorder.html",manifest=session["manifest"],API_URL=API_URL+"/",Order=order,Total=data.get("Total"),EMAIL=email)    
         except Exception as e:
             print(str(e))
