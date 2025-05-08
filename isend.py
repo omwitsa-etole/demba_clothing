@@ -4,14 +4,14 @@ import os
 API_BASE = "https://sandbox.intasend.com/"
 
 
-token = 'ISSecretKey_test_8bd4113d-853b-400d-b303-e51cb06cc008'#os.getenv("I_TOKEN")
-publishable_key = 'ISPubKey_test_b09c268f-62ed-4e5e-ad0b-7ec9b55d7212'#os.getenv("I_KEY")
+token = 'ISSecretKey_live_a7b6105b-7db2-472c-bbc3-43fcfac8628d'#os.getenv("I_TOKEN")
+publishable_key = 'ISPubKey_live_744d56eb-ff9b-4054-8fdb-25844b0206b4'#os.getenv("I_KEY")
 
 service = None
 
 def auth():
     global service
-    service = APIService(token=token, publishable_key=publishable_key, test=True)
+    service = APIService(token=token, publishable_key=publishable_key, test=False)
 
 async def stk():
     
