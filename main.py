@@ -388,9 +388,17 @@ def webhook(num):
             pass
 @app.route("/order/success/<string:num>",methods=["GET","POST"])
 @app.route("/order/success/<string:num>/",methods=["GET","POST"])
-def confirm_order(num):
+async def confirm_order(num):
     print(num)
+    #print("detail",)
     u = API_URL+"/api/cart/confirm?order="+num
+    order = await fetch_order(num)
+    response_ = requests.post("http://82.29.190.14:8001/getMail",headers={},data =json.dumps({'receivers':['omwitsaetole@gmail.com',
+        'dembaclothing53@gmail.com','omwitsabradone@gmail.com',order['email']
+    ],
+    'subject':'Order Payment Success Confirmation - '+order['orderNumber'],'body':'This is a confirmation email for payment made for order '+order['orderNumber']+ "\n."+
+    "Contact dembaclothing53@gmail.com for any queries. Thank you.\n"
+    }))
     if request.method == "POST":
         data = request.get_json()
         if not data:
