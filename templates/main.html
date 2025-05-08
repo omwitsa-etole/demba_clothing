@@ -3355,6 +3355,13 @@
 </head>
 
 <body class="home page-template page-template-page-home page-template-page-home-php page page-id-62 theme-ashade woocommerce-no-js ashade-body ashade-rcp ashade-idp shadowcore-lazy--yes ashade-loading--full ashade-unloading--full ashade-header--layout01 ashade-smooth-scroll ashade-native-touch-scroll ashade-header-sticky  has-spotlight ashade-home-template ashade-layout--vertical elementor-default elementor-kit-632">
+    <!-- Loader -->
+    <div id="iloader" class="d-flex justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100 bg-white" style="z-index: 1050;">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+  
     <header id="ashade-header" data-fade-point="0" class="ashade-header--transparent" >
         <div class="ashade-header-inner" >
             <div class="ashade-logo-block">
@@ -3546,10 +3553,14 @@
             const header = document.getElementById("ashade-header");
             if (!header) return;
 
-            if (window.location.pathname === "/") {
+            if (window.location.pathname === "/" ) {
             header.style.backgroundColor = "transparent";
             } else {
             header.style.backgroundColor = "#17171B";
+            }
+            const loader = document.getElementById("iloader");
+            if (loader) {
+            loader.style.display = "none";
             }
         });
         jQuery('#commentform').each(function() {
