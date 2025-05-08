@@ -449,10 +449,12 @@ async def checkout():
         num = request.args.get("number")
         order = await fetch_order(num)
         #if len(cart) > 0:
-            
+        md = "CARD-PAYMENT"
+        if mthd != "card":
+            md = "MPESA"
         #print("order fetch=>",order)
         isp.auth()
-        url = await isp.get_url(order['phone'],order['email'],total,order['orderNumber'])
+        url = await isp.get_url(order['phone'],order['email'],total,order['orderNumber'],md)
         return render_template("confirmorder.html",manifest=session["manifest"],PAY_URL = url,API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"],Method=mthd)    
     if request.method == "POST":
         email = request.form["billing_email"]
