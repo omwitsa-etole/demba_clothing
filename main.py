@@ -187,13 +187,13 @@ async def fetch_data():
     except Exception as e:
         print("error",e)
     if feed:
-        ALL_FEED += [f for f in feed if f not in ALL_FEED]
+        ALL_FEED = feed#[f for f in feed if f not in ALL_FEED]
 
     if product:
-        ALL_PRODUCT += [f for f in product if f not in ALL_PRODUCT]
+        ALL_PRODUCT = product#[f for f in product if f not in ALL_PRODUCT]
 
     if banner:
-        ALL_BANNER += [f for f in banner if f not in ALL_BANNER]
+        ALL_BANNER = banner#[f for f in banner if f not in ALL_BANNER]
 
 @app.route('/static/<path:filename>')
 def static_sample(filename):
