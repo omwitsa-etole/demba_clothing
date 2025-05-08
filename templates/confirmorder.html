@@ -531,8 +531,11 @@
     //invoice = data.invoice._id;
     btn.setAttribute("id", "btn-pay")
     btn.innerHTML = "Pay Now"
-    document.getElementById("carbk").children[0].appendChild(btn)
+    if("{{Method}}" != "card"){
+      document.getElementById("carbk").children[0].appendChild(btn)
    
+    }
+    
 
     const addModal = (id) => {
         let el = `

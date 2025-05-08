@@ -345,6 +345,9 @@
                                 <div class="tracking-time-box">
                                     <div class="tracking-time"><strong>Payment Status</strong></div>
                                     <span>{{Order['orderStatus']}}</span>
+                                    {%if Order['orderStatus'] == "Pending"%}
+                                        <span><a href="/checkout?number={{Order['orderNumber']}}" style="text-decoration: underline;cursor: pointer;">Complete Payment</a></span>
+                                    {%endif%}
                                 </div>
                                 <div class="tracking-location style-three">
                                     <span class="dott"></span>

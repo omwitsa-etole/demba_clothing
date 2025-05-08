@@ -439,17 +439,21 @@ async def checkout():
     u = API_URL+"/api/cart/checkout?user="+CURRENT_USER
     print("cart",ITEMS_CART)
     total = 0
+    mthd = "card"
     for i in ITEMS_CART:
         total += i['payable']
     if request.args.get("number"):
-        mthd = "mpesa"
+        
         if request.args.get("method"):
             mthd = request.args.get("method")
         num = request.args.get("number")
         order = await fetch_order(num)
+        #if len(cart) > 0:
+            
         #print("order fetch=>",order)
-        url = await isp.get_url(order['phone'],order['email'],order['amount'],order['orderNumber'])
-        return render_template("confirmorder.html",manifest=session["manifest"],PAY_URL = url,API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"],Method=method)    
+        isp.auth()
+        url = await isp.get_url(order['phone'],order['email'],total,order['orderNumber'])
+        return render_template("confirmorder.html",manifest=session["manifest"],PAY_URL = url,API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"],Method=mthd)    
     if request.method == "POST":
         email = request.form["billing_email"]
         names = request.form["billing_first_name"]+" "+request.form["billing_last_name"]
