@@ -17,12 +17,12 @@ async def stk():
     
     response = service.collect.mpesa_stk_push(phone_number=ph,
                                   email=em, amount=amt, narrative=desc)
-    print(response)
+    #print(response)
     return response
 
 async def status(iid):
     response = service.collect.status(invoice_id=iid)
-    print(response)
+    #print(response)
     return response
 
 async def get_url(phone,email,amount,desc,md):
@@ -30,7 +30,7 @@ async def get_url(phone,email,amount,desc,md):
         print(phone,email,amount,desc)
         response = service.collect.checkout(phone_number=phone,method= md,api_ref=desc,
                                         email=email, amount=amount, currency="KES", comment="Payment for Order: "+desc, redirect_url="https://demba-clothing.com/order/success/"+desc)
-        print(response)
+        #print(response)
         return response.get("url")
     except Exception as e:
         print(str(e))
