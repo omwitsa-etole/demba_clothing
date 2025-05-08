@@ -3348,11 +3348,14 @@
      body{
         font-family: 'Special Elite', cursive !important;
      }
+     .ashade-header{
+       background-color: #17171B;
+     }
      </style>
 </head>
 
 <body class="home page-template page-template-page-home page-template-page-home-php page page-id-62 theme-ashade woocommerce-no-js ashade-body ashade-rcp ashade-idp shadowcore-lazy--yes ashade-loading--full ashade-unloading--full ashade-header--layout01 ashade-smooth-scroll ashade-native-touch-scroll ashade-header-sticky  has-spotlight ashade-home-template ashade-layout--vertical elementor-default elementor-kit-632">
-    <header id="ashade-header" data-fade-point="0" class="ashade-header--transparent" style="background-color: #17171B;">
+    <header id="ashade-header" data-fade-point="0" class="ashade-header--transparent" >
         <div class="ashade-header-inner" >
             <div class="ashade-logo-block">
                 <a href="/" class="ashade-logo is-retina lg-link">
@@ -3539,6 +3542,16 @@
     <div class="ashade-rcp-message-wrap">Context Menu is disabled by settings.</div>
     /*
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const header = document.getElementById("ashade-header");
+            if (!header) return;
+
+            if (window.location.pathname === "/") {
+            header.style.backgroundColor = "transparent";
+            } else {
+            header.style.backgroundColor = "#17171B";
+            }
+        });
         jQuery('#commentform').each(function() {
             jQuery(this).on('submit', function(e) {
                 e.preventDefault();
