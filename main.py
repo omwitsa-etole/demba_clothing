@@ -107,7 +107,7 @@ async def before_request_func():
     session["manifest"]["address"] = "Nairobi, KE"
     session["manifest"]["email"] = "dembaclothing53@gmail.com"
     session["manifest"]["mobile"] = "072657277"
-    session["manifest"]["ig"] = "dembaclothing"
+    session["manifest"]["ig"] = "demba_clothing"
     session["manifest"]["yt"] = "dembaclothing"
 
 
