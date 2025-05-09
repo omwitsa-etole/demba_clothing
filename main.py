@@ -88,7 +88,7 @@ async def before_request_func():
     elif session["manifest"].get("rate") == None:
         cd = get_country_code()
         curr = "KES"
-        if cd == "KE":
+        if cd.upper() == "KE":
             rt = 1
         else:
             rt = EX_RATE
@@ -103,6 +103,13 @@ async def before_request_func():
     #else:
     #    #if session["manifest"]["cart_items"] == 0:
     #    #    await fetch_cart()
+
+    session["manifest"]["address"] = "Nairobi, KE"
+    session["manifest"]["email"] = "dembaclothing53@gmail.com"
+    session["manifest"]["mobile"] = "072657277"
+    session["manifest"]["ig"] = "dembaclothing"
+    session["manifest"]["yt"] = "dembaclothing"
+
 
 @app.route("/api/getcountry")
 def get_country_code():
