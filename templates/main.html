@@ -18,111 +18,7 @@
     </style>
     <link rel='dns-prefetch' href='//fonts.googleapis.com' />
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-    
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        window._wpemojiSettings = {
-            "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/",
-            "ext": ".png",
-            "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/",
-            "svgExt": ".svg",
-            "source": {
-                "concatemoji": "\/static\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"
-            }
-        };
-        /*! This file is auto-generated */
-        ! function(i, n) {
-            var o, s, e;
-
-            function c(e) {
-                try {
-                    var t = {
-                        supportTests: e,
-                        timestamp: (new Date).valueOf()
-                    };
-                    sessionStorage.setItem(o, JSON.stringify(t))
-                } catch (e) {}
-            }
-
-            function p(e, t, n) {
-                e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0);
-                var t = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data),
-                    r = (e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(n, 0, 0), new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data));
-                return t.every(function(e, t) {
-                    return e === r[t]
-                })
-            }
-
-            function u(e, t, n) {
-                switch (t) {
-                    case "flag":
-                        return n(e, "\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f", "\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f") ? !1 : !n(e, "\ud83c\uddfa\ud83c\uddf3", "\ud83c\uddfa\u200b\ud83c\uddf3") && !n(e, "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", "\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");
-                    case "emoji":
-                        return !n(e, "\ud83d\udc26\u200d\u2b1b", "\ud83d\udc26\u200b\u2b1b")
-                }
-                return !1
-            }
-
-            function f(e, t, n) {
-                var r = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? new OffscreenCanvas(300, 150) : i.createElement("canvas"),
-                    a = r.getContext("2d", {
-                        willReadFrequently: !0
-                    }),
-                    o = (a.textBaseline = "top", a.font = "600 32px Arial", {});
-                return e.forEach(function(e) {
-                    o[e] = t(a, e, n)
-                }), o
-            }
-
-            function t(e) {
-                var t = i.createElement("script");
-                t.src = e, t.defer = !0, i.head.appendChild(t)
-            }
-            "undefined" != typeof Promise && (o = "wpEmojiSettingsSupports", s = ["flag", "emoji"], n.supports = {
-                everything: !0,
-                everythingExceptFlag: !0
-            }, e = new Promise(function(e) {
-                i.addEventListener("DOMContentLoaded", e, {
-                    once: !0
-                })
-            }), new Promise(function(t) {
-                var n = function() {
-                    try {
-                        var e = JSON.parse(sessionStorage.getItem(o));
-                        if ("object" == typeof e && "number" == typeof e.timestamp && (new Date).valueOf() < e.timestamp + 604800 && "object" == typeof e.supportTests) return e.supportTests
-                    } catch (e) {}
-                    return null
-                }();
-                if (!n) {
-                    if ("undefined" != typeof Worker && "undefined" != typeof OffscreenCanvas && "undefined" != typeof URL && URL.createObjectURL && "undefined" != typeof Blob) try {
-                        var e = "postMessage(" + f.toString() + "(" + [JSON.stringify(s), u.toString(), p.toString()].join(",") + "));",
-                            r = new Blob([e], {
-                                type: "text/javascript"
-                            }),
-                            a = new Worker(URL.createObjectURL(r), {
-                                name: "wpTestEmojiSupports"
-                            });
-                        return void(a.onmessage = function(e) {
-                            c(n = e.data), a.terminate(), t(n)
-                        })
-                    } catch (e) {}
-                    c(n = f(s, u, p))
-                }
-                t(n)
-            }).then(function(e) {
-                for (var t in e) n.supports[t] = e[t], n.supports.everything = n.supports.everything && n.supports[t], "flag" !== t && (n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && n.supports[t]);
-                n.supports.everythingExceptFlag = n.supports.everythingExceptFlag && !n.supports.flag, n.DOMReady = !1, n.readyCallback = function() {
-                    n.DOMReady = !0
-                }
-            }).then(function() {
-                return e
-            }).then(function() {
-                var e;
-                n.supports.everything || (n.readyCallback(), (e = n.source || {}).concatemoji ? t(e.concatemoji) : e.wpemoji && e.twemoji && (t(e.twemoji), t(e.wpemoji)))
-            }))
-        }((window, document), window._wpemojiSettings);
-        /* ]]> */
-    </script>
+   
     <link rel='stylesheet' id='ext-elementor-css-css' href='/static/wp-content/plugins/shadow-core/assets/css/ext-elementor.css?ver=6.7.1' type='text/css' media='all' />
     <link rel='stylesheet' id='shadowcore-elements-css-css' href='/static/wp-content/plugins/shadow-core/assets/css/elements.css?ver=6.7.1' type='text/css' media='all' />
     <link rel='stylesheet' id='shadowcore-elements-responsive-css-css' href='/static/wp-content/plugins/shadow-core/assets/css/elements-responsive.css?ver=6.7.1' type='text/css' media='all' />
@@ -488,9 +384,6 @@
         }
     </style>
     <link rel='stylesheet' id='contact-form-7-css' href='/static/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.0.1' type='text/css' media='all' />
-    <link rel='stylesheet' id='woocommerce-layout-css' href='/static/wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css?ver=9.4.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='woocommerce-smallscreen-css' href='/static/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css?ver=9.4.3' type='text/css' media='only screen and (max-width: 768px)' />
-    <link rel='stylesheet' id='woocommerce-general-css' href='/static/wp-content/plugins/woocommerce/assets/css/woocommerce.css?ver=9.4.3' type='text/css' media='all' />
     <style id='woocommerce-inline-inline-css' type='text/css'>
         .woocommerce form .form-row .required {
             visibility: visible;
@@ -3227,8 +3120,6 @@
         };
         /* ]]> */
     </script>
-    <script type="text/javascript" src="/static/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=9.4.3" id="wc-add-to-cart-js" defer="defer" data-wp-strategy="defer"></script>
-    <script type="text/javascript" src="/static/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.9.4.3" id="js-cookie-js" defer="defer" data-wp-strategy="defer"></script>
     <script type="text/javascript" id="woocommerce-js-extra">
         /* <![CDATA[ */
         var woocommerce_params = {
@@ -3605,7 +3496,6 @@
         })();
     </script>
     <link rel='stylesheet' id='wc-blocks-style-css' href='/static/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-9.4.3' type='text/css' media='all' />
-    <script type="text/javascript" src="/static/wp-includes/js/imagesloaded.min.js?ver=5.0.0" defer="defer" id="imagesloaded-js"></script>
     <script type="text/javascript" src="/static/wp-includes/js/masonry.min.js?ver=4.2.2" id="masonry-js" defer="defer" ></script>
     <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/shadow-elements.js?ver=6.7.1" id="shadow-elements-js-js" defer="defer"></script>
     <!-- <script type="text/javascript" src="/static/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" id="wp-hooks-js"></script>
@@ -3613,113 +3503,11 @@
      <script type="text/javascript" src="/static/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" id="wp-i18n-js"></script> -->
      
     <script type="text/javascript" src="/static/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.0.1" id="swv-js" defer="defer"></script>
-    <script type="text/javascript" id="contact-form-7-js-before">
-        /* <![CDATA[ */
-        var wpcf7 = {
-            "api": {
-                "root": "\/static\/wp-json\/",
-                "namespace": "contact-form-7\/v1"
-            }
-        };
-        /* ]]> */
-    </script>
+  
     <!-- <script type="text/javascript" src="/static/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.0.1" id="contact-form-7-js"></script>
     <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/lib/photoswipe.min.js?ver=6.7.1" id="photoswipe-js" data-wp-strategy="defer"></script> -->
-    <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/lib/photoswipe-ui-default.min.js?ver=6.7.1" defer="defer" id="photoswipe-ui-js"></script>
-    <script type="text/javascript" id="mediaelement-core-js-before">
-        /* <![CDATA[ */
-        var mejsL10n = {
-            "language": "en",
-            "strings": {
-                "mejs.download-file": "Download File",
-                "mejs.install-flash": "You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/",
-                "mejs.fullscreen": "Fullscreen",
-                "mejs.play": "Play",
-                "mejs.pause": "Pause",
-                "mejs.time-slider": "Time Slider",
-                "mejs.time-help-text": "Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.",
-                "mejs.live-broadcast": "Live Broadcast",
-                "mejs.volume-help-text": "Use Up\/Down Arrow keys to increase or decrease volume.",
-                "mejs.unmute": "Unmute",
-                "mejs.mute": "Mute",
-                "mejs.volume-slider": "Volume Slider",
-                "mejs.video-player": "Video Player",
-                "mejs.audio-player": "Audio Player",
-                "mejs.captions-subtitles": "Captions\/Subtitles",
-                "mejs.captions-chapters": "Chapters",
-                "mejs.none": "None",
-                "mejs.afrikaans": "Afrikaans",
-                "mejs.albanian": "Albanian",
-                "mejs.arabic": "Arabic",
-                "mejs.belarusian": "Belarusian",
-                "mejs.bulgarian": "Bulgarian",
-                "mejs.catalan": "Catalan",
-                "mejs.chinese": "Chinese",
-                "mejs.chinese-simplified": "Chinese (Simplified)",
-                "mejs.chinese-traditional": "Chinese (Traditional)",
-                "mejs.croatian": "Croatian",
-                "mejs.czech": "Czech",
-                "mejs.danish": "Danish",
-                "mejs.dutch": "Dutch",
-                "mejs.english": "English",
-                "mejs.estonian": "Estonian",
-                "mejs.filipino": "Filipino",
-                "mejs.finnish": "Finnish",
-                "mejs.french": "French",
-                "mejs.galician": "Galician",
-                "mejs.german": "German",
-                "mejs.greek": "Greek",
-                "mejs.haitian-creole": "Haitian Creole",
-                "mejs.hebrew": "Hebrew",
-                "mejs.hindi": "Hindi",
-                "mejs.hungarian": "Hungarian",
-                "mejs.icelandic": "Icelandic",
-                "mejs.indonesian": "Indonesian",
-                "mejs.irish": "Irish",
-                "mejs.italian": "Italian",
-                "mejs.japanese": "Japanese",
-                "mejs.korean": "Korean",
-                "mejs.latvian": "Latvian",
-                "mejs.lithuanian": "Lithuanian",
-                "mejs.macedonian": "Macedonian",
-                "mejs.malay": "Malay",
-                "mejs.maltese": "Maltese",
-                "mejs.norwegian": "Norwegian",
-                "mejs.persian": "Persian",
-                "mejs.polish": "Polish",
-                "mejs.portuguese": "Portuguese",
-                "mejs.romanian": "Romanian",
-                "mejs.russian": "Russian",
-                "mejs.serbian": "Serbian",
-                "mejs.slovak": "Slovak",
-                "mejs.slovenian": "Slovenian",
-                "mejs.spanish": "Spanish",
-                "mejs.swahili": "Swahili",
-                "mejs.swedish": "Swedish",
-                "mejs.tagalog": "Tagalog",
-                "mejs.thai": "Thai",
-                "mejs.turkish": "Turkish",
-                "mejs.ukrainian": "Ukrainian",
-                "mejs.vietnamese": "Vietnamese",
-                "mejs.welsh": "Welsh",
-                "mejs.yiddish": "Yiddish"
-            }
-        };
-        /* ]]> */
-    </script>
-    <script type="text/javascript" src="/static/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.17" defer="defer" id="mediaelement-core-js"></script>
-    <script type="text/javascript" src="/static/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=6.7.1" defer="defer" id="mediaelement-migrate-js"></script>
-    <script type="text/javascript" id="mediaelement-js-extra">
-        /* <![CDATA[ */
-        var _wpmejsSettings = {
-            "pluginPath": "\/static\/wp-includes\/js\/mediaelement\/",
-            "classPrefix": "mejs-",
-            "stretching": "responsive",
-            "audioShortcodeLibrary": "mediaelement",
-            "videoShortcodeLibrary": "mediaelement"
-        };
-        /* ]]> */
-    </script>
+    
+   
     <script type="text/javascript" src="/static/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=6.7.1" id="wp-mediaelement-js" defer="defer"></script>
     <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/lib/gsap.min.js?ver=6.7.1" defer="defer" id="gsap-js"></script>
    
@@ -3728,41 +3516,7 @@
     <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" defer="defer" id="jquery-ui-core-js"></script>
     <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.3" defer="defer" id="jquery-ui-mouse-js"></script>
     <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.3" defer="defer" id="jquery-ui-slider-js"></script>
-    <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/draggable.min.js?ver=1.13.3" defer="defer" id="jquery-ui-draggable-js"></script>
-    <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/customize-controls.js?ver=6.7.1" defer="defer" id="shadow-customize-controls-js-js"></script>
-    <script type="text/javascript" src="/static/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=9.4.3" defer="defer" id="sourcebuster-js-js"></script>
-    <script type="text/javascript" id="wc-order-attribution-js-extra">
-        /* <![CDATA[ */
-        var wc_order_attribution = {
-            "params": {
-                "lifetime": 1.0000000000000000818030539140313095458623138256371021270751953125e-5,
-                "session": 30,
-                "base64": false,
-                "ajaxurl": "\/static\/wp-admin\/admin-ajax.php",
-                "prefix": "wc_order_attribution_",
-                "allowTracking": true
-            },
-            "fields": {
-                "source_type": "current.typ",
-                "referrer": "current_add.rf",
-                "utm_campaign": "current.cmp",
-                "utm_source": "current.src",
-                "utm_medium": "current.mdm",
-                "utm_content": "current.cnt",
-                "utm_id": "current.id",
-                "utm_term": "current.trm",
-                "utm_source_platform": "current.plt",
-                "utm_creative_format": "current.fmt",
-                "utm_marketing_tactic": "current.tct",
-                "session_entry": "current_add.ep",
-                "session_start_time": "current_add.fd",
-                "session_pages": "session.pgs",
-                "session_count": "udata.vst",
-                "user_agent": "udata.uag"
-            }
-        };
-        /* ]]> */
-    </script>
+    
     <script type="text/javascript" src="/static/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=9.4.3" defer="defer" id="wc-order-attribution-js"></script>
 
     <script>
@@ -3863,6 +3617,20 @@
                     // /document.getElementById("cartitems").innerHTML = res.Items+"";
                 }
             })
+        }
+
+        function removeCart(id,elm){
+            //console.log(elm);
+            fetchFunction("/api/remove-cart?iid="+id,"get",{},"",function(res){
+                if(res.success == true || res.Success == true){
+                    elm.remove();
+                    location.reload();
+                }else{
+                   // alert("faile")
+                   elm.remove();
+                }
+            })
+            
         }
 
         function sendPay(phone,amount,desc,email){

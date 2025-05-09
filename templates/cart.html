@@ -1,6 +1,12 @@
 {%extends 'main.html'%}
 
 {%block content%}
+<style>
+    main{
+       background-color: #17171B !important;
+       
+     }
+</style>
 
 <main id="page-649" class="ashade-content-wrap post-649 page type-page status-publish hentry">
     <div class="ashade-content-scroll is-centered"><div class="ashade-header-holder" style="height: 115px;"></div>
@@ -42,7 +48,9 @@
                                     <div class="ashade-cart-item-inner">
                                         <div class="ashade-cart-item-info">
                                             <div class="ashade-cart-item--thmb">
-                                                <a href="/product/{{item['id']}}/"><img fetchpriority="high" decoding="async" width="640" height="640" src="{{API_URL}}{{item['imageURL']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="/wp-content/uploads/2020/01/masonry-2col-10-640x640.jpg 640w, {{API_URL}}{{item['imageURL']}} 100w, {{API_URL}}{{item['imageURL']}} 150w" sizes="(max-width: 640px) 100vw, 640px"></a>								</div><!-- .ashade-cart-item--thmb -->
+                                                <a href="/product/{{item['id']}}/"><img fetchpriority="high" decoding="async" width="640" height="640"
+                                                     src="{{API_URL}}{{item['imageURL']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" 
+                                                     alt="" srcset="{{API_URL}}{{item['imageURL']}} 640w, {{API_URL}}{{item['imageURL']}} 100w, {{API_URL}}{{item['imageURL']}} 150w" sizes="(max-width: 640px) 100vw, 640px"></a>								</div><!-- .ashade-cart-item--thmb -->
                                             <div class="ashade-cart-item--name" data-title="Product">
                                                 <h5>
                                                     <span><span><a href="#" rel="tag"></a></span></span>
@@ -72,7 +80,8 @@
                                     </div><!-- .ashade-cart-item-inner -->
                                     
                                     <div class="ashade-product-remove-wrap product-remove">
-                                        <a href="/api/cart/?remove_item={{item['id']}}&amp;_wpnonce=2387bb7b90" class="ashade-cart-item--remove remove" aria-label="Remove this item" data-product_id="{{item['id']}}" data-product_sku=""></a>						</div>
+                                        {%set iid = item["id"]%}
+                                        <a href="javascript:void(0)" onclick="removeCart('{{iid}}',this.parentElement.parentElement)" class="ashade-cart-item--remove remove" aria-label="Remove this item" data-product_id="{{item['id']}}" data-product_sku=""></a>						</div>
                                 </li>
                                 {%endfor%}
                                                 

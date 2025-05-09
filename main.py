@@ -227,6 +227,34 @@ def resendemail():
         pass
     return jsonify({'Success':False})
 
+@app.route("/api/remove-cart")
+def del_cart(id):
+    global CART_ITEMS
+    iid = request.args.get("iid")
+    u = API_URL+"/api/cart/remove?user="+CURRENT_USER+"&id="+iid
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    try:
+        rsession = requests.Session()
+
+        data = {}
+        
+        response = rsession.post(u,headers=headers,data=json.dumps({}))
+        if response.status_code == 200:
+            data = response.json()
+            #print("data",data)
+            CART_ITEMS = data.get("items")
+            if session["manifest"] != None:
+                session["manifest"]["cart_items"] = CART_ITEMS
+            return jsonify(data)
+    except Exception as e:
+        print(str(e))
+        pass
+
+
+    return jsonify({'Success':False,'Response':response.status_code})
+
 @app.route("/api/add-to-cart/<string:id>")
 def add_cart(id):
     print("adding",id)
