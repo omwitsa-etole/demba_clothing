@@ -135,6 +135,7 @@ async def fetch_cart():
         #print(response.status_code,"<=code")
         if response.status_code == 200:
             data = response.json()
+            print("cart",data)
             items = data.get("items")
             total = data.get("total")
     except Exception as e:
@@ -228,7 +229,7 @@ def resendemail():
     return jsonify({'Success':False})
 
 @app.route("/api/remove-cart")
-def del_cart(id):
+def del_cart():
     global CART_ITEMS
     iid = request.args.get("iid")
     u = API_URL+"/api/cart/remove?user="+CURRENT_USER+"&id="+iid
@@ -243,7 +244,7 @@ def del_cart(id):
         response = rsession.post(u,headers=headers,data=json.dumps({}))
         if response.status_code == 200:
             data = response.json()
-            #print("data",data)
+            print("data",data)
             CART_ITEMS = data.get("items")
             if session["manifest"] != None:
                 session["manifest"]["cart_items"] = CART_ITEMS
