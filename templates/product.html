@@ -154,9 +154,11 @@ Description	</h3>
     <span>You may also like</span>
     Related Products			</h3>
     
-<ul class="products columns-3">
+<ul class="products columns-3" style="display: flex;flex-direction: row;flex-wrap: wrap;">
     {%for product in Related%}
-    <li class="product type-product post-668 status-publish first instock product_cat-fashion product_tag-fashion product_tag-personal product_tag-photo product_tag-photography has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple">
+    <li class="product type-product post-668 status-publish first instock product_cat-fashion product_tag-fashion product_tag-personal product_tag-photo product_tag-photography has-post-thumbnail downloadable shipping-taxable purchasable product-type-simple"
+        style="max-width: 289px;"
+    >
         <div class="ashade-woo-loop-item ashade-wc-tools--always">
         <div class="ashade-woo-loop-item__image-wrap">
                     <a href="/product/{{product['td']}}/">
