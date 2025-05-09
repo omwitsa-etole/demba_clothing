@@ -64,7 +64,7 @@
         {% for im in Product['images'] %}
             {% set img = im['image_Url'][1:] if im['image_Url'].startswith('/') else im['image_Url'] %}
             <div class="col-auto">
-                <img src="{{API_URL}}{{ img }}" class="img-fluid" style="max-height: 150px;max-width: 189px;" alt="Product Image">
+                <img src="{{API_URL}}{{ img }}" loading="lazy" class="img-fluid" style="max-height: 150px;max-width: 189px;" alt="Product Image">
             </div>
         {% endfor %}
     </div>
@@ -162,7 +162,7 @@ Description	</h3>
         <div class="ashade-woo-loop-item ashade-wc-tools--always">
         <div class="ashade-woo-loop-item__image-wrap">
                     <a href="/product/{{product['td']}}/">
-            <img width="640" height="640" src="{{API_URL}}{{product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async"
+            <img width="640" loading="lazy" height="640" src="{{API_URL}}{{product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async"
              srcset="{{API_URL}}{{product['image_Url']}} 640w, {{API_URL}}{{product['image_Url'][1:] if product['image_Url'].startswith('/') else product['image_Url']}} 150w" sizes="(max-width: 640px) 100vw, 640px">			</a>
         <div class="ashade-wc-loop-item__view"  id="added-{{product['Id']}}">
             <h6>
