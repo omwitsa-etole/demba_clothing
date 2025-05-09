@@ -3625,6 +3625,7 @@
                 if(res.success == true || res.Success == true){
                     elm.remove();
                     location.reload();
+                    jQuery(".cartitems").html(res.items);
                 }else{
                    // alert("faile")
                    elm.remove();
