@@ -131,6 +131,40 @@ def get_country_code():
     res = requests.get(f'https://ipapi.co/{ip}/country/')
     return res.text
 
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    pages = []
+
+    # Get all the static routes in the Flask app
+    for rule in app.url_map.iter_rules():
+        if 'GET' in rule.methods and not rule.arguments:
+            url = url_for(rule.endpoint, _external=True)
+            pages.append([url, datetime.now()])
+
+    # Generate the XML for the sitemap
+    sitemap_xml = render_sitemap(pages)
+
+    return Response(sitemap_xml, mimetype='application/xml')
+
+
+def render_sitemap(pages):
+    # Create the XML structure
+    sitemap_xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    sitemap_xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for page in pages:
+        sitemap_xml.append('<url>')
+        sitemap_xml.append(f'<loc>{page[0]}</loc>')
+        sitemap_xml.append(f'<lastmod>{page[1].strftime("%Y-%m-%dT%H:%M:%S+00:00")}</lastmod>')
+        sitemap_xml.append('</url>')
+
+    sitemap_xml.append('</urlset>')
+
+    return '\n'.join(sitemap_xml)
+
+
+
+
 async def fetch_cart():
     global CART_ITEMS
     global ITEMS_CART
