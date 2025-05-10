@@ -4,7 +4,7 @@ import json
 import smtplib, ssl
 import os
 import sys
-from flask import Flask, request,make_response  ,session,render_template,jsonify,send_from_directory,redirect
+from flask import Flask, request,make_response  ,Response,session,render_template,jsonify,send_from_directory,redirect
 import os
 from flask_cors import CORS
 import httpx
@@ -13,6 +13,7 @@ import json
 import getpass
 import socket
 import hashlib
+from datetime import datetime
 
 # Combine username and hostname
 user = getpass.getuser()
@@ -33,12 +34,18 @@ API_URL = "https://estore.etoletools.online"#"https://e6f4-102-2-132-28.ngrok-fr
 
 ALL_FEED = []
 ALL_PRODUCT = []
+ALL_CATEGORY = []
+ALL_SUB_CATEGORY = []
 ALL_BANNER = []
 #CURRENT_USER = "CurrentUser" 
 CART_ITEMS = 0
 ITEMS_CART = []
 CORS(app)
 
+@app.route("/robots.txt")
+def robots():
+    content = "User-agent: *\nDisallow: /\nAllow: /arrival\n"
+    return Response(content, mimetype="text/plain")
 @app.route('/static/<path:filename>')
 def static_files(filename):
     response = make_response(send_from_directory('static', filename))
@@ -108,7 +115,11 @@ async def before_request_func():
     session["manifest"]["email"] = "dembaclothing53@gmail.com"
     session["manifest"]["mobile"] = "072657277"
     session["manifest"]["ig"] = "demba_clothing"
+    session["manifest"]["yurl"] = "demba_clothing"
     session["manifest"]["yt"] = "dembaclothing"
+    session["manifest"]["about"] = """  At Demba Clothing, Happiness is handmade. We craft Unique pieces from upcycled
+                            fabrics, blending sustainability with style to create fashion
+                            with purpose and heart."""
 
 
 @app.route("/api/getcountry")
@@ -179,19 +190,25 @@ async def fetch_data():
     feed = []
     banner = []
     product = []
+    ctgs = []
+    stgs = []
     global ALL_BANNER
     global ALL_FEED
     global ALL_PRODUCT
+    global ALL_CATEGORY
+    global ALL_SUB_CATEGORY
     try:
         response = requests.post(u,headers=headers)
         #print(response.status_code)
         if response.status_code == 200:
             data = response.json()
-            print("data=>",data)
+            #print("data=>",data)
             success = data.get("success", False)
             feed = data.get("feed")
             product = data.get("products")
             banner = data.get("banners")
+            ctgs = data.get("categories")
+            sctgs = data.get("subcategories")
     except Exception as e:
         print("error",e)
     if feed:
@@ -202,6 +219,11 @@ async def fetch_data():
 
     if banner:
         ALL_BANNER = banner#[f for f in banner if f not in ALL_BANNER]
+    if ctgs:
+        ALL_CATEGORY = ctgs
+    if sctgs:
+        ALL_SUB_CATEGORY = sctgs
+    print("categories",ctgs[:2])
 
 @app.route('/static/<path:filename>')
 def static_sample(filename):
@@ -328,13 +350,42 @@ async def shop():
     # 'Stock': '3', 'RelDate': '/Date(1745096400000)/', 'image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]
     return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL+"/",manifest=session["manifest"])
 
+@app.route("/arrival")
+@app.route("/arrivals")
+async def arrivals():
+    
+    global ALL_BANNER
+    global ALL_FEED
+    global ALL_PRODUCT  
+    global ALL_CATEGORY
+    global ALL_SUB_CATEGORY
+    prds = []
+    prds_b = ALL_CATEGORY
+    if len(ALL_PRODUCT) == 0:
+        await fetch_data()
+    for p in ALL_PRODUCT:
+        #print(p["relDate"])
+        date_str = p["relDate"]
+        parsed_date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S") 
+        current_year = datetime.now().year
+        if parsed_date.year == current_year:
+            prds.append(p)
+        elif parsed_date.year == current_year-1:
+            prds.append(p)
+    print('prod=>',prds_b[:2])
+    return render_template("arrival.html",API_URL = API_URL+"/",manifest=session["manifest"],
+    CATEGORIES=ALL_CATEGORY,PRODUCTS=prds,PRODUCTS_B=prds_b,FEED=ALL_FEED[:9],
+        SUBCATEGORIES = ALL_SUB_CATEGORY
+    )
+
 @app.route("/feed")
 async def feed():
     
     global ALL_BANNER
     global ALL_FEED
     global ALL_PRODUCT  
-    await fetch_data()
+    if len(ALL_FEED) == 0:
+        await fetch_data()
    
 
     #print("Feed=>",ALL_FEED)

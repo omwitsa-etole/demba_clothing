@@ -10,6 +10,8 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <title> Demba &#8211; Clothing</title>
     <meta name='robots' content='max-image-preview:large' />
+    <script src="https://kit.fontawesome.com/c63faa1f51.js" crossorigin="anonymous"></script>
+	
     <script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=fj9m42L55eks9pxJUcUAcW7T_xI2qhuMSIFOZOpWf7r8UpogXuvQB8lfhqzgb5Xv3agBX1GI0Z5F8uj34cmucQ" charset="UTF-8"></script>
     <style>
         img:is([sizes="auto" i], [sizes^="auto," i]) {
@@ -3266,7 +3268,7 @@
                     <div class="menu-main-menu-container">
                         <ul id="menu-main-menu" class="main-menu">
                             
-                            <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27"><a href="/feed">ARRIVALS</a>
+                            <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-27"><a href="/arrival">ARRIVALS</a>
                                
                             </li>
                             <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-26"><a href="/shop">Shop All</a>
@@ -3311,11 +3313,21 @@
             </div>
         </div>
     </header>
+    <style>
+        .hidder {
+            display: none !important;
+        }
+    </style>
     {%block content%}
     {%endblock%}
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const images = document.querySelectorAll('img');
+        try{
+            document.getElementById("iloader").classList.remove("d-flex");
+            document.getElementById("iloader").classList.add("hidder");
+
+        }catch(e){console.warn(e)}
         
         images.forEach(img => {
             if (!img.src) return;
@@ -3508,7 +3520,6 @@
     <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/lib/photoswipe.min.js?ver=6.7.1" id="photoswipe-js" data-wp-strategy="defer"></script> -->
     
    
-    <script type="text/javascript" src="/static/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=6.7.1" id="wp-mediaelement-js" defer="defer"></script>
     <script type="text/javascript" src="/static/wp-content/plugins/shadow-core/assets/js/lib/gsap.min.js?ver=6.7.1" defer="defer" id="gsap-js"></script>
    
     <script type="text/javascript" src="/static/wp-content/themes/ashade/assets/js/core.js?ver=6.7.1" id="ashade-core-js-js" defer="defer"></script>
@@ -3517,8 +3528,6 @@
     <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.3" defer="defer" id="jquery-ui-mouse-js"></script>
     <script type="text/javascript" src="/static/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.3" defer="defer" id="jquery-ui-slider-js"></script>
     
-    <script type="text/javascript" src="/static/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=9.4.3" defer="defer" id="wc-order-attribution-js"></script>
-
     <script>
        let isSetting = 0;
         function fetchFunction(url, method, data, token, fn,setUser) {
