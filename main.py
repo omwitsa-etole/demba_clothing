@@ -47,7 +47,7 @@ def robots():
     content = "User-agent: *\nDisallow: /\nAllow: /arrival\n"
     return Response(content, mimetype="text/plain")
 
-@app.route("/static/bg.mp4")
+@app.route("/bg/bg.mp4")
 def stream_video():
     path = "static/bg.mp4"
     range_header = request.headers.get('Range', None)
