@@ -4,7 +4,7 @@ import json
 import smtplib, ssl
 import os
 import sys
-from flask import Flask, request,make_response ,url_for ,Response,session,render_template,jsonify,send_from_directory,redirect
+from flask import Flask, request,make_response,send_file ,url_for ,Response,session,render_template,jsonify,send_from_directory,redirect
 import os
 from flask_cors import CORS
 import httpx
@@ -46,6 +46,40 @@ CORS(app)
 def robots():
     content = "User-agent: *\nDisallow: /\nAllow: /arrival\n"
     return Response(content, mimetype="text/plain")
+
+@app.route("/static/bg.mp4")
+def stream_video():
+    path = "static/bg.mp4"
+    range_header = request.headers.get('Range', None)
+    if not os.path.exists(path):
+        abort(404)
+
+    if not range_header:
+        return send_file(path)
+
+    size = os.path.getsize(path)
+    byte1, byte2 = 0, None
+
+    match = range_header.strip().split("=")[-1]
+    if "-" in match:
+        parts = match.split("-")
+        byte1 = int(parts[0])
+        if parts[1]:
+            byte2 = int(parts[1])
+
+    byte2 = byte2 if byte2 is not None else size - 1
+    length = byte2 - byte1 + 1
+
+    with open(path, 'rb') as f:
+        f.seek(byte1)
+        data = f.read(length)
+
+    rv = Response(data, 206, mimetype="video/mp4", direct_passthrough=True)
+    rv.headers.add('Content-Range', f'bytes {byte1}-{byte2}/{size}')
+    rv.headers.add('Accept-Ranges', 'bytes')
+    rv.headers.add('Content-Length', str(length))
+    return rv
+
 @app.route('/static/<path:filename>')
 def static_files(filename):
     response = make_response(send_from_directory('static', filename))
