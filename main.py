@@ -44,7 +44,7 @@ CORS(app)
 
 @app.route("/robots.txt")
 def robots():
-    content = "User-agent: *\nDisallow: /\nAllow: /arrival\n"
+    content = "User-agent: *\nAllow: *\n"
     return Response(content, mimetype="text/plain")
 
 @app.route("/bg/bg.mp4")
