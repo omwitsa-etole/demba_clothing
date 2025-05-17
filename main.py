@@ -470,10 +470,15 @@ def contact():
 async def search():
     global ALL_PRODUCT
     q = request.args.get("s")
+    q = q.strip()
     if len(ALL_PRODUCT) == 0:
         await fetch_data()
     ps = []
     for ap in ALL_PRODUCT:
+        if request.args.get("menu") == "true":
+            if ap["sensorFormat"].lower() == q.lower():
+                ps.append(ap)
+                continue
         if any(q.lower() in str(val).lower() for val in ap.values()):
             ps.append(ap)
     return render_template("shop.html",products=ps,API_URL=API_URL+"/",manifest=session["manifest"])
