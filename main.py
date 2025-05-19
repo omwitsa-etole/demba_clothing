@@ -259,7 +259,7 @@ async def fetch_data():
     banner = []
     product = []
     ctgs = []
-    stgs = []
+    sctgs = []
     global ALL_BANNER
     global ALL_FEED
     global ALL_PRODUCT
