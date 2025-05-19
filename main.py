@@ -149,6 +149,8 @@ async def before_request_func():
     session["manifest"]["email"] = "dembaclothing53@gmail.com"
     session["manifest"]["mobile"] = "072657277"
     session["manifest"]["ig"] = "demba_clothing"
+    session["manifest"]["rate"] = 1
+    session["manifest"]["currency"] = "KES"
     session["manifest"]["yurl"] = "demba_clothing"
     session["manifest"]["yt"] = "dembaclothing"
     session["manifest"]["about"] = """  At Demba Clothing, Happiness is handmade. We craft Unique pieces from upcycled
