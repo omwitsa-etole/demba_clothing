@@ -39,6 +39,7 @@ ALL_SUB_CATEGORY = []
 ALL_BANNER = []
 #CURRENT_USER = "CurrentUser" 
 CART_ITEMS = 0
+PRODUCTS = []
 ITEMS_CART = []
 CORS(app)
 
@@ -267,6 +268,7 @@ async def fetch_data():
     global ALL_PRODUCT
     global ALL_CATEGORY
     global ALL_SUB_CATEGORY
+    global PRODUCTS
     try:
         response = requests.post(u,headers=headers)
         #print(response.status_code)
@@ -277,6 +279,7 @@ async def fetch_data():
             feed = data.get("feed")
             product = data.get("products")
             banner = data.get("banners")
+            PRODUCTS = data.get("aps")
             ctgs = data.get("categories")
             sctgs = data.get("subcategories")
     except Exception as e:
@@ -293,7 +296,7 @@ async def fetch_data():
         ALL_CATEGORY = ctgs
     if sctgs:
         ALL_SUB_CATEGORY = sctgs
-    print("categories",ctgs[:2])
+    #print("aps",PRODUCTS[:2])
 
 @app.route('/static/<path:filename>')
 def static_sample(filename):
@@ -429,18 +432,20 @@ async def arrivals():
     global ALL_PRODUCT  
     global ALL_CATEGORY
     global ALL_SUB_CATEGORY
+    global PRODUCTS
     prds = []
     prds_b = ALL_CATEGORY
     #if len(ALL_PRODUCT) == 0:
     await fetch_data()
-    print("products=>",ALL_PRODUCT[:2])
+    print("products=>",PRODUCTS[:2])
     for p in ALL_PRODUCT:
         #print(p["relDate"])
+        
         date_str = p["relDate"]
         parsed_date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S") 
         current_year = datetime.now().year
         
-        if p["arrival"] != None and p["arrival"] != "" and p["arrival"] != "false":
+        if p["arrival"] != None and p["arrival"] != "" and p["arrival"] != "off":
             prds.append(p)
         #elif parsed_date.year == current_year-1:
         #    prds.append(p)
