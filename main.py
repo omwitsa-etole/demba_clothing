@@ -431,18 +431,20 @@ async def arrivals():
     global ALL_SUB_CATEGORY
     prds = []
     prds_b = ALL_CATEGORY
-    if len(ALL_PRODUCT) == 0:
-        await fetch_data()
+    #if len(ALL_PRODUCT) == 0:
+    await fetch_data()
+    print("products=>",ALL_PRODUCT[:2])
     for p in ALL_PRODUCT:
         #print(p["relDate"])
         date_str = p["relDate"]
         parsed_date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S") 
         current_year = datetime.now().year
-        if parsed_date.year == current_year:
+        
+        if p["arrival"] != None and p["arrival"] != "" and p["arrival"] != "false":
             prds.append(p)
-        elif parsed_date.year == current_year-1:
-            prds.append(p)
-    print('prod=>',prds_b[:2])
+        #elif parsed_date.year == current_year-1:
+        #    prds.append(p)
+    print('prod=>',prds[:2])
     return render_template("arrival.html",API_URL = API_URL+"/",manifest=session["manifest"],
     CATEGORIES=ALL_CATEGORY,PRODUCTS=prds,PRODUCTS_B=prds_b,FEED=ALL_FEED[:9],
         SUBCATEGORIES = ALL_SUB_CATEGORY
@@ -478,7 +480,7 @@ async def search():
     ps = []
     for ap in ALL_PRODUCT:
         if request.args.get("menu") == "true":
-            if ap["sensorFormat"].lower() == q.lower():
+            if ap["material"].lower() == q.lower():
                 ps.append(ap)
                 continue
         if any(q.lower() in str(val).lower() for val in ap.values()):
