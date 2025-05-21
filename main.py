@@ -483,9 +483,11 @@ async def search():
     if len(ALL_PRODUCT) == 0:
         await fetch_data()
     ps = []
+    print("a",ALL_PRODUCT[0])
     for ap in ALL_PRODUCT:
         if request.args.get("menu") == "true":
-            if ap["material"].lower() == q.lower():
+            
+            if ap["menu"].lower() == q.lower():
                 ps.append(ap)
                 continue
         if any(q.lower() in str(val).lower() for val in ap.values()):
