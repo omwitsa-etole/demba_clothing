@@ -48,6 +48,9 @@ def robots():
     content = "User-agent: *\nAllow: *\n"
     return Response(content, mimetype="text/plain")
 
+@app.route("/BingSiteAuth.xml")
+def bingsearch():
+    return send_file("templates/BingSiteAuth.xml")
 @app.route("/bg/bg.mp4")
 def stream_video():
     path = "static/bg.mp4"
