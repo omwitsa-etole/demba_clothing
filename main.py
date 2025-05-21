@@ -470,8 +470,20 @@ async def feed():
 
      #[{'Id': 1, 'Caption': 'Mas', 'Banner_Url': '/ImagesData/MainPageBanners/denim_full.png638815101281727486_1.png', 'Timestamp': '/Date(1745902528173)/'}, {'Id': 2, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_15_IMG_3505.JPG638815472860811741_1.JPG', 'Timestamp': '/Date(1745939686080)/'}, {'Id': 3, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_19_IMG_3510.JPG638815473531698146_1.JPG', 'Timestamp': '/Date(1745939753170)/'}]
 
-@app.route("/contact")
+@app.route("/contact",methods=["GET","POST"])
 def contact():
+    if request.method == "POST":
+        m = request.form["your-email"]
+        n=request.form["your-name"]
+        mg = request.form["your-message"]
+        tel = request.form["your-tel"]
+        response_ = requests.post("http://82.29.190.14:8001/getMail",headers={},data =json.dumps({'receivers':['omwitsaetole@gmail.com',
+        'dembaclothing53@gmail.com','omwitsabradone@gmail.com',m
+        ],
+        'subject':'Contact Message Confirmation - '+n,'body':'This is a confirmation that we have recieved your message and your response will be sent to your Email ['+m+ "] or Phone ["+tel+"]\n."+
+        "Your Message: \n\n `"+mg+"`\n"+
+        "Contact dembaclothing53@gmail.com for any queries. Thank you.\n"
+        }))
     return render_template("contact.html",manifest=session["manifest"])
 
 @app.route("/search")
