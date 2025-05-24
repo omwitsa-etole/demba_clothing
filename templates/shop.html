@@ -9,11 +9,12 @@
                     position: relative;
     }
     .mcft{
-         color:white;background-color: black;position: absolute;bottom: 1px;width: 100%;
+         color:white;background-color: black;width: 100%;
     }
     .mci{
         height: 334px;
     }
+    .mbtn{display: none;}
     @media only screen and (max-width: 767px) {
         .mcd{
             max-width: 49%;
@@ -31,6 +32,13 @@
         }
     }
     @media only screen and (max-width: 467px) {
+        .mcft button{
+            color: transparent;       /* Hide text color */
+            text-shadow: none;  
+            display: none;      /* Ensure no shadow shows */
+            }
+        .mbtn{display: inline;}
+
         .mcd{
             max-width: 42%;
             font-size:  12px;
@@ -41,6 +49,12 @@
         }
     }
      @media only screen and (max-width: 337px) {
+        .mcft button{
+            color: transparent;       /* Hide text color */
+            text-shadow: none;  
+            display: none;      /* Ensure no shadow shows */
+            }
+        .mbtn{display: inline;}
         .mcd{
             max-width: 78%;
             font-size:  14px;
@@ -123,8 +137,8 @@
                         
                         <div class="card-footer d-flex justify-content-between bg-dark mcft btn-sm" >
                             <button class="btn btn-primary " onclick="AddCart('{{pid}}','{{pname}}','1','{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" class="button ashade-woo-loop-item__add2cart product_type_simple add_to_cart_button" data-product_id="{{pid}}" data-product_sku="" aria-label="Add to cart: “{{pr['title']}}”" >
-                               ADD TO CART <i class="fa fa-shopping-cart"></i></button>
-                           
+                               ADD TO CART </button>
+                            <a class="btn mbtn"  onclick="AddCart('{{pid}}','{{pname}}','1','{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1" class="button ashade-woo-loop-item__add2cart product_type_simple add_to_cart_button" data-product_id="{{pid}}" data-product_sku="" aria-label="Add to cart: “{{pr['title']}}”">Shop Now <i class="fa fa-shopping-cart"></i></a>
                         </div>
                     </div>
                 </div>
