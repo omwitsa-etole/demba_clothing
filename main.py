@@ -421,10 +421,14 @@ async def shop():
     
     if len(ALL_PRODUCT) == 0 or request.args.get("refresh") != None:
         await fetch_data()
+    ps = []
+    for ap in ALL_PRODUCT: 
+        if ap["menu"].lower() != "upcycled" and ap["menu"].lower() != "preloved" and ap["stock"] != '0':
+            ps.append(ap)
     #print("product",ALL_PRODUCT[0])
     # [{'Id': 3, 'Title': 'DENIM JACKET', 'Material': None, 'Price': 2580, 'Sale': 12, 'Brand_Id': 3, 'Brand': 'OTHERS', 'Series': '28', 'Category': 'DENIM JACKET', 'SubCategory': 'HEAVY DENIM', 'Level': 'MEDIUM', 'EDetail': 'BEAUTIFUL DENIM JACKET',
     # 'Stock': '3', 'RelDate': '/Date(1745096400000)/', 'image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]
-    return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL+"/",manifest=session["manifest"])
+    return render_template("shop.html",products=ps,API_URL=API_URL+"/",manifest=session["manifest"])
 
 @app.route("/arrival")
 @app.route("/arrivals")
