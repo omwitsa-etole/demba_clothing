@@ -421,7 +421,7 @@ async def shop():
     
     if len(ALL_PRODUCT) == 0 or request.args.get("refresh") != None:
         await fetch_data()
-    print("product",ALL_PRODUCT[0])
+    #print("product",ALL_PRODUCT[0])
     # [{'Id': 3, 'Title': 'DENIM JACKET', 'Material': None, 'Price': 2580, 'Sale': 12, 'Brand_Id': 3, 'Brand': 'OTHERS', 'Series': '28', 'Category': 'DENIM JACKET', 'SubCategory': 'HEAVY DENIM', 'Level': 'MEDIUM', 'EDetail': 'BEAUTIFUL DENIM JACKET',
     # 'Stock': '3', 'RelDate': '/Date(1745096400000)/', 'image_Url': '/ImagesData/CameraImages/638807485157737314_1.png'}]
     return render_template("shop.html",products=ALL_PRODUCT,API_URL=API_URL+"/",manifest=session["manifest"])
@@ -498,7 +498,7 @@ async def search():
     if len(ALL_PRODUCT) == 0:
         await fetch_data()
     ps = []
-    print("a",ALL_PRODUCT[0])
+    #print("a",ALL_PRODUCT[0])
     for ap in ALL_PRODUCT:
         if request.args.get("menu") == "true":
             
@@ -538,6 +538,18 @@ def product(id):
 @app.route("/product_category/<string:id>/")
 def category(id):
     return render_template("product.html",manifest=session["manifest"],API_URL=API_URL+"/")
+
+@app.route("/category/<string:id>/")
+async def upcycled(id):
+    global ALL_PRODUCT
+    ps = []
+    if len(ALL_PRODUCT) == 0:
+        await fetch_data()
+    for ap in ALL_PRODUCT: 
+        if ap["menu"].lower() == id.lower():
+            ps.append(ap)
+            #continue
+    return render_template("shop.html",manifest=session["manifest"],API_URL=API_URL+"/",products=ps)
 
 
 @app.route("/order/webhook",methods=["GET","POST"])
