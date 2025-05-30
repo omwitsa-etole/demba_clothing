@@ -506,10 +506,10 @@ async def search():
     for ap in ALL_PRODUCT:
         if request.args.get("menu") == "true":
             
-            if ap["menu"].lower() == q.lower():
+            if ap["menu"].lower() == q.lower() and  ap["stock"] != '0':
                 ps.append(ap)
                 continue
-        if any(q.lower() in str(val).lower() for val in ap.values()):
+        if any(q.lower() in str(val).lower() for val in ap.values()) and ap["stock"] != '0':
             ps.append(ap)
     return render_template("shop.html",products=ps,API_URL=API_URL+"/",manifest=session["manifest"])
 
@@ -530,7 +530,7 @@ def product(id):
         print("product data",data)
         product = data.get("product")
         related = data.get("others")
-    print("prduct=>",related)
+    #print("prduct=>",related)
     # {'Id': 3, 'Title': 'DENIM JACKET', 'Stock': 3, 
     #'Brand': {'Id': 3, 'Name': 'OTHERS', 'Brand_Image': '/ImagesData/MainPageBanners/others.png638807481921931380_1.png'}, 
     #'Size': 28, 'Category': {'Id': 1, 'Name': 'DENIM JACKET', 'Category_Image': '/ImagesData/MainPageBanners/denim_jacket.png638807386439292131_1.png'}, 'SubCategory': {'Id': 2, 'Name': 'HEAVY DENIM', 'Category_Id': 1}, 'Level': 'MEDIUM', 'Price': 2580.0, 'Sale': 12.0,
@@ -550,7 +550,7 @@ async def upcycled(id):
     if len(ALL_PRODUCT) == 0:
         await fetch_data()
     for ap in ALL_PRODUCT: 
-        if ap["menu"].lower() == id.lower():
+        if ap["menu"].lower() == id.lower() and ap["stock"] != '0':
             ps.append(ap)
             #continue
     return render_template("shop.html",manifest=session["manifest"],API_URL=API_URL+"/",products=ps)
