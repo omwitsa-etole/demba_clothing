@@ -35,6 +35,18 @@
         {{Product['eDetail']}}
     </div>
 </div><!-- .ashade-single-product--excerpt -->
+
+<div class="container">
+    <div class="row" style="display: flex;flex-direction:column;width: 100%;overflow-x: scroll;">
+        {% for im in Product['images'] %}
+            {% set img = im['image_Url'][1:] if im['image_Url'].startswith('/') else im['image_Url'] %}
+            <div class="col-auto">
+                <img src="{{API_URL}}{{ img }}" loading="lazy" class="img-fluid" style="max-height: 150px;max-width: 189px;" alt="Product Image">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+	
 <div class="ashade-single-product--qty">
                 <form class="ashade-single-add2cart--simple cart" onsubmit="return false" action="#/product/evening/" method="post" enctype="multipart/form-data">
     
@@ -59,16 +71,7 @@
 </form>
 
 
-<div class="container">
-    <div class="row">
-        {% for im in Product['images'] %}
-            {% set img = im['image_Url'][1:] if im['image_Url'].startswith('/') else im['image_Url'] %}
-            <div class="col-auto">
-                <img src="{{API_URL}}{{ img }}" loading="lazy" class="img-fluid" style="max-height: 150px;max-width: 189px;" alt="Product Image">
-            </div>
-        {% endfor %}
-    </div>
-    </div>
+
 
 </div><!-- .ashade-single-product--qty -->
 <div class="ashade-single-product--tags" style="display:none;">
