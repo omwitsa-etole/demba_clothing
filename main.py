@@ -499,8 +499,8 @@ async def search():
     global ALL_PRODUCT
     q = request.args.get("s")
     q = q.strip()
-    if len(ALL_PRODUCT) == 0:
-        await fetch_data()
+    #if len(ALL_PRODUCT) == 0:
+    await fetch_data()
     ps = []
     #print("a",ALL_PRODUCT[0])
     for ap in ALL_PRODUCT:
