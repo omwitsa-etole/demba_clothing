@@ -473,7 +473,7 @@ async def feed():
    
 
     #print("Feed=>",ALL_FEED)
-    return render_template("feed.html",feed=ALL_FEED.reverse(),API_URL=API_URL+"/",manifest=session["manifest"])
+    return render_template("feed.html",feed=ALL_FEED[::-1],API_URL=API_URL+"/",manifest=session["manifest"])
 
      #[{'Id': 1, 'Caption': 'Mas', 'Banner_Url': '/ImagesData/MainPageBanners/denim_full.png638815101281727486_1.png', 'Timestamp': '/Date(1745902528173)/'}, {'Id': 2, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_15_IMG_3505.JPG638815472860811741_1.JPG', 'Timestamp': '/Date(1745939686080)/'}, {'Id': 3, 'Caption': '', 'Banner_Url': '/ImagesData/MainPageBanners/2024_08_26_09_19_IMG_3510.JPG638815473531698146_1.JPG', 'Timestamp': '/Date(1745939753170)/'}]
 
