@@ -13,6 +13,7 @@ import json
 import getpass
 import socket
 import hashlib
+import re
 from datetime import datetime
 
 # Combine username and hostname
@@ -662,9 +663,13 @@ async def checkout():
         md = "CARD-PAYMENT"
         if mthd != "card":
             md = "MPESA"
-        #print("order fetch=>",order)
+            digits = re.findall(r'\d+', str(order['phone']))
+        else:
+            digits =  order['phone']
+        #print("method=>",md,digits)
         isp.auth()
-        url = await isp.get_url(order['phone'],order['email'],total,order['orderNumber'],md)
+        
+        url = await isp.get_url(digits,order['email'],total,order['orderNumber'],md)
         return render_template("confirmorder.html",manifest=session["manifest"],PAY_URL = url,API_URL=API_URL+"/",Order=order,Total=total,EMAIL=order["email"],Method=mthd)    
     if request.method == "POST":
         email = request.form["billing_email"]

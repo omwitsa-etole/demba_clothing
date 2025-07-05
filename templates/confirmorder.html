@@ -419,25 +419,27 @@
         var ph = "{{Order['phone']}}";
         var md = "{{Method}}";
         if(md.toLocaleLowerCase() != "card"){
-          // body.innerHTML += `
-          //   <div class="trip" onclick="document.getElementById('${ph}').checked=true">
-          //       <div class="trip-details">
-          //           <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
-          //           <span class="payment-title">${"MPESA"} <span ></span></span>
-          //           <span class="payment-desc">${ph} <span ></span></span>
-          //       </div>
-          //       <p class="amount">
-          //           <div class="form-check">
-          //               <input class="form-check-input" type="radio" onchange="editDelete(this.id)" name="paymentDefault" id="${ph}">
-          //               <label class="form-check-label" for="${ph}">
-          //               </label>
-          //               </div>
+         body.innerHTML += `
+            <div class="trip" onclick="document.getElementById('${ph}').checked=true">
+                <div class="trip-details">
+                    <img src="assets/images/icons/" style="visibility:hidden;" width="46" height="24"></img>
+                    <span class="payment-title">${"MPESA CHECKOUT"} <span ></span></span>
+                    <span class="payment-desc">${"{{EMAIL}}"} <span ></span></span>
+                </div>
+                <p class="amount">
+                    <div class="form-check">
+                       
+                        <label class="form-check-label" for="${ph}">
+                          Click this
+                        </label><a class="form-control" href="{{PAY_URL}}">Payment Link</a>
+                        </div>
 
-          //       </p>
+                </p>
 
-          //   </div>
-          //   `;
-        }
+            </div>
+            `;
+        
+        }else{
           body.innerHTML += `
             <div class="trip" onclick="document.getElementById('${ph}').checked=true">
                 <div class="trip-details">
@@ -458,6 +460,8 @@
             </div>
             `;
         
+        }
+          
         
 
 
