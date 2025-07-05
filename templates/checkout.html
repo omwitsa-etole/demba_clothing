@@ -11,6 +11,61 @@
 			margin: 2% auto !important;
 		}
 	}
+    .ashade-wc-checkout-payment {
+        padding: 1rem;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+    }
+
+    .wc_payment_methods {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wc_payment_method {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background-color: #2a2a2a;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        border: 1px solid #444;
+    }
+
+    .wc_payment_method:hover {
+        background-color: #333;
+    }
+
+    .wc_payment_method input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    .payment_box {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background-color: #181818;
+        border-left: 4px solid #007bff;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .place-order {
+        margin-top: 2rem;
+    }
+
+    .place-order button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .place-order button:hover {
+        background-color: #0056b3;
+    }
 </style>
 <main id="page-650" class="ashade-content-wrap post-650 page type-page status-publish hentry">
     <div class="ashade-content-scroll" style=""><div class="ashade-header-holder" style="height: 95px;"></div>
@@ -129,51 +184,51 @@ Have a coupon? <a href="javascript:void(0)" class="showcoupon">Click here to ent
 <div id="payment" class="woocommerce-checkout-payment">
 <h4>Payment Method</h4>
 <div class="ashade-wc-checkout-payment">
-                    <ul class="wc_payment_methods payment_methods methods">
-            <li class="wc_payment_method payment_method_mpesa" onclick="this.children[0].click()">
-<input id="payment_method_mpesa" type="radio" selected class="input-radio" name="payment_method" onclick="setMode(this.value)" value="mpesa" checked="checked" data-order_button_text="">
+    <ul class="wc_payment_methods payment_methods methods">
+        <li class="wc_payment_method payment_method_mpesa" onclick="this.querySelector('input').click()">
+            <input id="payment_method_mpesa" type="radio" class="input-radio" name="payment_method"
+                onclick="setMode(this.value)" value="mpesa" checked>
+            <label for="payment_method_mpesa">Mpesa Payment</label>
+            <div class="payment_box payment_method_mpesa pmodes">
+                <p><b>Make your payment directly from your mpesa account.<br>
+                    (Fill the form using mpesa phone number and checkout.)<br>
+                    A payment link will be generated to complete payment.</b></p>
+            </div>
+        </li>
 
-<label for="payment_method_mpesa">
-Mpesa Payment</label>
-    <div class="payment_box payment_method_mpesa pmodes">
-    <p>Make your payment directly from your mpesa account. 
-        (Fill the form using mpesa phone number and checkout) 
-        A payment link will be generated to complete payment.</p>
-</div>
-</li>
-<li class="wc_payment_method payment_method_card" onclick="this.children[0].click()">
-<input id="payment_method_card" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="card" data-order_button_text="">
+        <li class="wc_payment_method payment_method_card" onclick="this.querySelector('input').click()">
+            <input id="payment_method_card" type="radio" class="input-radio" name="payment_method"
+                onclick="setMode(this.value)" value="card">
+            <label for="payment_method_card">Card</label>
+            <div class="payment_box payment_method_card pmodes">
+                <p>A checkout link will be generated to complete your payment. Use your Order ID as the payment reference.
+                Your order will not be shipped until the funds have cleared.</p>
+            </div>
+        </li>
 
-<label for="payment_method_card">
-Card 	</label>
-    <div class="payment_box payment_method_card pmodes" style="display:none;">
-    <p>A checkout link will be generated to complete your payment.Please use your Order ID as the payment reference. 
-        Your order will not be shipped until the funds have cleared in our account</p>
-</div>
-</li>
-<li class="wc_payment_method payment_method_cod" onclick="this.children[0].click()" style="display: none;">
-<input id="payment_method_cod" type="radio" class="input-radio"  onclick="setMode(this.value)" name="payment_method" value="cash" data-order_button_text="">
+        <li class="wc_payment_method payment_method_cod" onclick="this.querySelector('input').click()" style="display: none;">
+            <input id="payment_method_cod" type="radio" class="input-radio" name="payment_method"
+                onclick="setMode(this.value)" value="cash">
+            <label for="payment_method_cod">Cash on Delivery</label>
+            <div class="payment_box payment_method_cod pmodes">
+                <p>Pay with cash upon delivery.</p>
+            </div>
+        </li>
+    </ul>
 
-<label for="payment_method_cod">
-Cash on delivery 	</label>
-    <div class="payment_box payment_method_cod pmodes" style="display:none;">
-    <p>Pay with cash upon delivery.</p>
-</div>
-</li>
-        </ul>
-                <div class="form-row place-order">
-        <noscript>
-            Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.					<br/><button type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="Update totals">Update totals</button>
-        </noscript>
+    <div class="form-row place-order">
+        <div class="woocommerce-terms-and-conditions-wrapper">
+            <div class="woocommerce-privacy-policy-text"></div>
+        </div>
 
-            <div class="woocommerce-terms-and-conditions-wrapper">
-<div class="woocommerce-privacy-policy-text"></div>
+        <button type="submit" class="button alt" name="woocommerce_checkout_place_order"
+            id="place_order" value="Place order" data-value="Place order">Place order</button>
+
+        <input type="hidden" id="woocommerce-process-checkout-nonce"
+            name="woocommerce-process-checkout-nonce" value="0dbe0dd511">
+        <input type="hidden" name="_wp_http_referer" value="/wp/ashade/?wc-ajax=update_order_review">
     </div>
-
-        
-        <button type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order" value="Place order" data-value="Place order">Place order</button>
-        
-        <input type="hidden" id="woocommerce-process-checkout-nonce" name="woocommerce-process-checkout-nonce" value="0dbe0dd511"><input type="hidden" name="_wp_http_referer" value="/wp/ashade/?wc-ajax=update_order_review">			</div>
+</div>
 </div><!-- .ashade-wc-checkout-payment -->
 </div><!-- #payment -->
 <!-- #payment -->
@@ -195,25 +250,29 @@ Cash on delivery 	</label>
     </div><!-- .ashade-content-scroll -->
 </main>
 <script>
-    function setMode(val){
-        console.log(val);
-        jQuery(".payment_box").css("display","none");
+    function setMode(val) {
+        console.log("Selected payment mode:", val);
+        // Hide all payment boxes
+        document.querySelectorAll('.payment_box').forEach(box => box.style.display = 'none');
 
-        switch(val){
+        // Show the selected payment box
+        switch (val) {
             case "mpesa":
-                jQuery(".payment_method_mpesa").css("display","block");
+                document.querySelector(".payment_method_mpesa .payment_box").style.display = 'block';
                 break;
-            case "paypal":
-                jQuery(".payment_method_paypal").css("display","block");
+            case "card":
+                document.querySelector(".payment_method_card .payment_box").style.display = 'block';
                 break;
             case "cash":
-                jQuery(".payment_method_cod").css("display","block");
-                
-                break;
-            default:
+                document.querySelector(".payment_method_cod .payment_box").style.display = 'block';
                 break;
         }
-
     }
-    </script>
+
+    // Ensure correct display on load
+    window.addEventListener("DOMContentLoaded", () => {
+        const selected = document.querySelector('input[name="payment_method"]:checked');
+        if (selected) setMode(selected.value);
+    });
+</script>
 {%endblock%}
