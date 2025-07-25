@@ -424,7 +424,7 @@ async def shop():
         await fetch_data()
     ps = []
     for ap in ALL_PRODUCT: 
-        if ap["menu"].lower() != "upcycled" and ap["menu"].lower() != "preloved" and ap["stock"] != '0':
+        if ap["menu"].lower() != "upcycled" and ap["menu"].lower() != "preloved" :#and ap["stock"] != '0'
             ps.append(ap)
     #print("product",ALL_PRODUCT[0])
     # [{'Id': 3, 'Title': 'DENIM JACKET', 'Material': None, 'Price': 2580, 'Sale': 12, 'Brand_Id': 3, 'Brand': 'OTHERS', 'Series': '28', 'Category': 'DENIM JACKET', 'SubCategory': 'HEAVY DENIM', 'Level': 'MEDIUM', 'EDetail': 'BEAUTIFUL DENIM JACKET',
@@ -507,10 +507,10 @@ async def search():
     for ap in ALL_PRODUCT:
         if request.args.get("menu") == "true":
             
-            if ap["menu"].lower() == q.lower() and  ap["stock"] != '0':
+            if ap["menu"].lower() == q.lower() :#and  ap["stock"] != '0'
                 ps.append(ap)
                 continue
-        if any(q.lower() in str(val).lower() for val in ap.values()) and ap["stock"] != '0':
+        if any(q.lower() in str(val).lower() for val in ap.values()) :#and ap["stock"] != '0'
             ps.append(ap)
     return render_template("shop.html",products=ps,API_URL=API_URL+"/",manifest=session["manifest"])
 
@@ -551,7 +551,7 @@ async def upcycled(id):
     if len(ALL_PRODUCT) == 0:
         await fetch_data()
     for ap in ALL_PRODUCT: 
-        if ap["menu"].lower() == id.lower() and ap["stock"] != '0':
+        if ap["menu"].lower() == id.lower() :#and ap["stock"] != '0'
             ps.append(ap)
             #continue
     return render_template("shop.html",manifest=session["manifest"],API_URL=API_URL+"/",products=ps)
