@@ -165,10 +165,14 @@
                                 </figcaption>
                             </div>
                             <div class="bottom-wrap"> 
+                                {% if stock_int != 0 and stock != "0"%}
                                 <a href="#" onclick="AddCart('{{pid}}','{{pname}}','1','{{psale}}','{{price}}','{{img}}','{{stock}}')" data-quantity="1"  class="btn btn-primary float-right" data-abc="true" data-product_id="{{pr['id']}}" data-product_sku="" aria-label="Add to cart: “{{pr['title']}}”" rel="nofollow">
                                     Buy Now
                                 </a>
-                                
+                                {%endif%}
+                                 {% if stock_int == 0 or stock == "0"%}
+                                    <span>Sold Out</span>   
+                                 {%endif%}
                                
                             </div>
                         </figure>
