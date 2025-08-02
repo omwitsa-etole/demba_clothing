@@ -94,8 +94,8 @@ def static_files(filename):
 
 @app.route('/ads.txt')
 def ads_txt():
-    return Response("google.com, pub-8402082494280043, DIRECT, f08c47fec0942fa0", mimetype='text/plain')
-    
+    return Response("google.com, pub-9822776477807273, DIRECT, f08c47fec0942fa0", mimetype='text/plain')
+
 @app.route("/api/pay/stk",methods=["POST"])
 async def pay_stk():
     ph = request.args.get("phone")
