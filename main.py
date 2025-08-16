@@ -489,8 +489,11 @@ def contact():
         n=request.form["your-name"]
         mg = request.form["your-message"]
         tel = request.form["your-tel"]
-        response_ = requests.post("http://82.29.190.14:8001/getMail",headers={},data =json.dumps({'receivers':['omwitsaetole@gmail.com',
-        'dembaclothing53@gmail.com','omwitsabradone@gmail.com',m
+        response_ = requests.post("http://82.29.190.14:8001/getMail",headers={},data =json.dumps({'receivers':[
+            'omwitsaetole@gmail.com',
+            #'dembaclothing53@gmail.com',
+        #'omwitsabradone@gmail.com',
+        m
         ],
         'subject':'Contact Message Confirmation - '+n,'body':'This is a confirmation that we have recieved your message and your response will be sent to your Email ['+m+ "] or Phone ["+tel+"]\n."+
         "Your Message: \n\n `"+mg+"`\n"+
